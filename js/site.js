@@ -23,6 +23,7 @@
         <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
           ${nav.map(([id, label, href]) => `<a href="${href}" ${id === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
         </nav>
+        <button class="language-toggle" type="button" data-language-toggle aria-label="Switch to Simplified Chinese">中文</button>
       </header>`;
 
     const toggle = header.querySelector(".nav-toggle");
@@ -45,6 +46,7 @@
         <div class="footer-contact">
           <span>University of Science and Technology Beijing</span>
           <span>B.Eng. Robotics Engineering · expected 2027</span>
+          <a href="mailto:gufan.wang.ustb@gmail.com">gufan.wang.ustb@gmail.com</a>
         </div>
         <div class="footer-base">
           <span>Research portfolio · project facts supported by retained hardware evidence and project records</span>
@@ -96,3 +98,4 @@
     });
   });
 })();
+
