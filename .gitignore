@@ -1,0 +1,9 @@
+# Local review material — never commit to the public repository.
+CONTENT_AUDIT.md
+MATERIALS_TO_ADD.md
+screenshots/
+
+# Local tooling files.
+.DS_Store
+Thumbs.db
+.vercel/

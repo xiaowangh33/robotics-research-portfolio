@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="55 kg quadruped EtherCAT RL Sim2Real case study by Wang Gufan.">
+  <title>55 kg EtherCAT Quadruped · Wang Gufan</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="quad">
+  <div data-site-header></div>
+  <main>
+    <section class="page-hero section-shell">
+      <div class="page-hero-grid">
+        <div>
+          <p class="page-kicker">CORE PROJECT 02 · ETHERCAT TORQUE CONTROL</p>
+          <h1>55 kg quadruped: tracing RL Sim2Real through actuation and timing.</h1>
+          <p class="lede">The quadruped extended the same reliability question into a heavier machine with 12 EtherCAT drives, Profile Torque mode, and a 2 kHz communication loop beneath the learned policy.</p>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Period</dt><dd>September 2025–June 2026</dd></div>
+          <div><dt>My role</dt><dd>Software and control stack, RL deployment, and mismatch diagnosis</dd></div>
+          <div><dt>Platform</dt><dd>55 kg · 12-actuator quadruped</dd></div>
+          <div><dt>Status</dt><dd>Hardware walking and obstacle behavior documented</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section-shell reveal">
+      <div class="media-stage">
+        <video controls muted playsinline preload="metadata" poster="assets/images/quadruped-walk-poster.jpg">
+          <source src="assets/video/quadruped-walk.mp4" type="video/mp4">
+        </video>
+        <div class="caption">
+          <span><strong>Hardware evidence.</strong> Recorded quadruped locomotion after model/interface and lower-level control iteration.</span>
+          <span class="source">Original project video · 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell two-col">
+        <div class="sticky-label reveal">
+          <p class="eyebrow">WHY THIS PROJECT MATTERED</p>
+          <p class="pullquote">A successful simulator rollout does not tell you which physical assumption will fail first.</p>
+        </div>
+        <div class="copy-stack reveal">
+          <p>I developed the software path from a learned locomotion policy to the EtherCAT hardware interface. During deployment, the central work shifted from policy training to diagnosis: model parameter error, actuator response delay, static friction, high-gain PD dynamics, and differences between the simulator’s actuation assumptions and the real drive chain.</p>
+          <p>Desired and measured joint trajectories were recorded to make that gap observable. I used those traces to revise the model/interface and add dynamics compensation before returning to hardware tests. This is the part of Sim2Real that most influenced my research direction: reliability depends on knowing whether an error came from the robot, the estimator, the action path, or the schedule.</p>
+          <ul class="fact-list">
+            <li><strong>Behavior</strong><span>Hardware walking and obstacle behavior, supported by retained videos and the latest CV.</span></li>
+            <li><strong>Actuation</strong><span>12 EtherCAT drives in CiA-402 Profile Torque mode.</span></li>
+            <li><strong>Policy</strong><span><span class="mono">45-D observation → 12-D action</span> at approximately 50 Hz.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow light">CONTROL PATH</p></div>
+          <div>
+            <h2>Policy, joint control, and fieldbus operate at different rates.</h2>
+            <p>The rate hierarchy is explicit in the archived hardware-interface source. That hierarchy is also why delay and jitter cannot be reduced to a single fixed parameter.</p>
+          </div>
+        </div>
+        <div class="architecture four reveal">
+          <article class="arch-node"><span class="frequency">≈ 50 Hz</span><h3>PPO policy</h3><p>45-D proprioceptive observation and command input.</p></article>
+          <article class="arch-node"><span class="frequency">≈ 1 kHz</span><h3>PD recompute</h3><p>Position-derived torque command with joint-specific mapping.</p></article>
+          <article class="arch-node"><span class="frequency">2 kHz</span><h3>SOEM EtherCAT</h3><p>PDO exchange and CiA-402 drive state management.</p></article>
+          <article class="arch-node"><span class="frequency">12 axes</span><h3>Profile Torque</h3><p>Real actuators with delay, friction, saturation, and drive dynamics.</p></article>
+        </div>
+        <div class="contract reveal">
+          <code>ω₍body₎ 3 · gravity 3 · command 3 · q 12 · dq 12 · last action 12<br>= 45 observations</code>
+          <span class="arrow">→</span>
+          <code>12 relative joint-position targets<br>→ PD torque → EtherCAT drives</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">DIAGNOSTIC LOOP</p></div>
+          <div><h2>Failure became an instrumentation problem.</h2></div>
+        </div>
+        <div class="evidence-chain reveal">
+          <article class="evidence-step">
+            <span>01 / OBSERVE</span>
+            <h3>Record desired and measured motion.</h3>
+            <p>Joint-level traces exposed lag, tracking shape, offsets, and axis-specific behavior that could not be inferred from body motion alone.</p>
+          </article>
+          <article class="evidence-step">
+            <span>02 / LOCALIZE</span>
+            <h3>Separate model, actuator, and interface mismatch.</h3>
+            <p>Deployment checks covered coordinate maps and signs, model parameters, static friction, actuator delay, and the lower-level PD response.</p>
+          </article>
+          <article class="evidence-step">
+            <span>03 / ITERATE</span>
+            <h3>Correct the model and compensate dynamics.</h3>
+            <p>The simulator/interface was revised, compensation was added where justified, and the same signal path was returned to hardware for verification.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">MEASURED JOINT EVIDENCE</p></div>
+          <div>
+            <h2>PACE-based data collection made the lower-level loop visible.</h2>
+            <p>The project archive includes command-versus-measurement plots and synchronized data-collection video. They are shown as diagnostic evidence, without claiming an unverified summary error metric.</p>
+          </div>
+        </div>
+        <div class="split-media">
+          <figure class="reveal">
+            <img src="assets/images/quadruped-joint-tracking.png" alt="Quadruped desired and measured front-left leg joint traces">
+            <figcaption><strong>Front-left leg command vs. measurement.</strong> Retained visualization from the deployment data archive.</figcaption>
+          </figure>
+          <figure class="reveal">
+            <video controls muted playsinline preload="metadata" poster="assets/images/quadruped-pace-poster.jpg">
+              <source src="assets/video/quadruped-pace.mp4" type="video/mp4">
+            </video>
+            <figcaption><strong>PACE data collection.</strong> Motion captured for joint-level diagnosis.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell two-col reverse">
+        <div class="reveal">
+          <p class="eyebrow light">WHAT THE ARCHIVE SUPPORTS</p>
+          <h2>A narrow, auditable claim is stronger than a polished but ambiguous one.</h2>
+          <p class="body-lg" style="color:#b6c0c5">The retained source includes several training configurations and exported-model iterations. I therefore claim only the hardware behaviors documented in the CV and media—not that every archived model file is interchangeable or deployment-ready.</p>
+        </div>
+        <div class="evidence-grid reveal" style="grid-template-columns:1fr">
+          <article class="evidence-card" style="background:#17222b;border-color:#46525a;color:white">
+            <p class="source-line" style="color:#6ab5d6">SUPPORTED</p>
+            <h3>Multi-rate EtherCAT hardware path</h3>
+            <p style="color:#acb7bd">Source-traceable policy, PD, SOEM/PDO, and drive-state logic plus recorded hardware locomotion.</p>
+          </article>
+          <article class="evidence-card" style="background:#17222b;border-color:#46525a;color:white">
+            <p class="source-line" style="color:#6ab5d6">NOT CLAIMED</p>
+            <h3>Unrecorded performance percentages</h3>
+            <p style="color:#acb7bd">No invented success rate, tracking score, obstacle-clearance statistic, or latency number is presented.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proposal-band">
+      <div class="section-shell proposal-grid reveal">
+        <div><span class="proposal-label">RESEARCH BRIDGE</span><h2>From delay compensation to delay-aware belief.</h2></div>
+        <div>
+          <p class="lede">The next step is to estimate the effective current state and its uncertainty from timestamped history—then let the controller adapt its action or risk level when the communication and actuation path becomes unreliable.</p>
+          <div class="button-row"><a class="button" href="research.html">Read the proposed study →</a><a class="button" href="systems.html">See supporting systems work →</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>

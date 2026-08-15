@@ -1,0 +1,10 @@
+# Keep internal review material out of every Vercel deployment bundle.
+CONTENT_AUDIT.md
+MATERIALS_TO_ADD.md
+screenshots/
+
+# Git metadata and local editor files are not public site assets.
+.git/
+.vercel/
+.DS_Store
+Thumbs.db

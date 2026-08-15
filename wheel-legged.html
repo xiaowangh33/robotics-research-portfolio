@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="25 kg wheel-legged robot RL Sim2Real case study by Wang Gufan.">
+  <title>25 kg Wheel-Legged Robot · Wang Gufan</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="wheel">
+  <div data-site-header></div>
+  <main>
+    <section class="page-hero section-shell">
+      <div class="page-hero-grid">
+        <div>
+          <p class="page-kicker">CORE PROJECT 01 · REAL LOCOMOTION</p>
+          <h1>25 kg wheel-legged robot: RL Sim2Real across a distributed control stack.</h1>
+          <p class="lede">A locomotion policy was only one component. The deployed system had to maintain consistent state, action, and timing semantics across Linux, shared memory, two microcontrollers, four CAN buses, and 16 actuators.</p>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Period</dt><dd>May–August 2026</dd></div>
+          <div><dt>My role</dt><dd>Control stack, RL training, deployment, and Sim2Real diagnosis</dd></div>
+          <div><dt>Platform</dt><dd>25 kg · 16 DoF wheel-legged robot</dd></div>
+          <div><dt>Status</dt><dd>Hardware standing, locomotion, stairs, and disturbance recovery</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section-shell reveal">
+      <div class="media-stage">
+        <video controls muted playsinline preload="metadata" poster="assets/images/wheel-disturbance-poster.jpg">
+          <source src="assets/video/wheel-disturbance.mp4" type="video/mp4">
+        </video>
+        <div class="caption">
+          <span><strong>Hardware evidence.</strong> External-disturbance test after expanding the randomization envelope and retuning deployment behavior.</span>
+          <span class="source">Original project video · 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell two-col">
+        <div class="sticky-label reveal">
+          <p class="eyebrow">THE DEPLOYMENT PROBLEM</p>
+          <p class="pullquote">Stable in simulation did not mean recoverable after a real impact.</p>
+        </div>
+        <div class="copy-stack reveal">
+          <p>The first hardware policy could stand and move, but an external kick produced growing oscillation and eventual loss of balance. The useful question was not “does PPO work?” It was which unmodeled effect—contact variation, motor response, gains, body properties, or control timing—was pushing the real closed loop outside the trained distribution.</p>
+          <p>I broadened dynamics randomization and disturbance exposure, then redeployed through the same verified interface. The retained training configuration includes randomized mass, center of mass, friction, actuator gains, reset state, persistent force/torque offsets, and impulse-like pushes. Action and proprioceptive latency are randomized over zero to five policy steps.</p>
+          <p>The result shown above is qualitative hardware evidence of kick recovery. No unrecorded success rate or robustness percentage is claimed.</p>
+          <ul class="fact-list">
+            <li><strong>Behavior</strong><span>Standing, wheeled locomotion, stair ascent/descent, and disturbance recovery on hardware.</span></li>
+            <li><strong>Policy</strong><span>PPO trained in Isaac Lab / RSL-RL and exported to ONNX.</span></li>
+            <li><strong>Interface</strong><span><span class="mono">57-D observation → 16-D action</span>, explicitly matched in training and deployment code.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow light">MULTI-RATE ARCHITECTURE</p></div>
+          <div>
+            <h2>One control loop, five timing domains.</h2>
+            <p>The deployed path separates policy inference from the higher-rate transport and motor loops. Frequencies below are taken from the archived configuration and source comments.</p>
+          </div>
+        </div>
+        <div class="architecture reveal">
+          <article class="arch-node"><span class="frequency">50 Hz</span><h3>ONNX policy</h3><p>Observation construction, state machine, and 16-D action output.</p></article>
+          <article class="arch-node"><span class="frequency">200 Hz</span><h3>Linux bridge</h3><p>Shared-memory exchange and dual-device coordination.</p></article>
+          <article class="arch-node"><span class="frequency">1 kHz</span><h3>MCU service</h3><p>WDP4 transport, local command/feedback handling, and watchdog logic.</p></article>
+          <article class="arch-node"><span class="frequency">500 Hz</span><h3>Motor refresh</h3><p>Per-motor CAN command/feedback across four 1 Mbps buses.</p></article>
+          <article class="arch-node"><span class="frequency">16 axes</span><h3>Hybrid actuation</h3><p>12 joint-position actions and 4 wheel-velocity actions.</p></article>
+        </div>
+        <div class="contract reveal">
+          <code>ω₍body₎ 3 · gravity 3 · command 3 · q 16 · dq 16 · last action 16<br>= 57 observations</code>
+          <span class="arrow">→</span>
+          <code>12 relative joint positions · 4 wheel velocities<br>= 16 actions</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell two-col reverse">
+        <div class="reveal">
+          <p class="eyebrow">TIMING AS A SAFETY-RELEVANT SIGNAL</p>
+          <h2>The code already needed an operational definition of “current.”</h2>
+          <p class="body-lg">Two microcontrollers cannot be merged safely just because both packets arrived. The Linux bridge pairs feedback from the same <span class="mono">observation_seq</span> epoch, checks local sample age and USB arrival skew, and stops rather than combining incompatible state.</p>
+        </div>
+        <div class="timeline reveal">
+          <article class="timeline-item">
+            <span class="label">EPOCH CONSISTENCY</span>
+            <h3>Same observation sequence</h3>
+            <p>Feedback from the two devices is accepted as one robot observation only when it belongs to the same logical epoch.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="label">FRESHNESS BOUNDS</span>
+            <h3>Age and skew checks</h3>
+            <p>The archived bridge uses a 10 ms local-age bound and a 30 ms USB arrival-skew bound for paired feedback.</p>
+          </article>
+          <article class="timeline-item">
+            <span class="label">FAIL-CLOSED</span>
+            <h3>No common state, no continued motion</h3>
+            <p>If a common observation cannot be formed for 500 ms, the system latches a stop. Per-motor feedback also has its own stale-data handling.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">SOURCE-TRACEABLE EVIDENCE</p></div>
+          <div><h2>Claims that can be followed from model contract to motor transport.</h2></div>
+        </div>
+        <div class="evidence-grid">
+          <article class="evidence-card reveal">
+            <p class="source-line">TRAINING CONFIGURATION</p>
+            <h3>Latency is sampled as complete delayed packets.</h3>
+            <p>Archived action and proprioception terms retain a short FIFO and select a delayed policy step, preserving a coherent vector instead of independently corrupting scalar entries.</p>
+          </article>
+          <article class="evidence-card reveal">
+            <p class="source-line">DEPLOYMENT MODEL</p>
+            <h3>Exported tensor dimensions are explicit.</h3>
+            <p>The ONNX contract is <code>obs[1,57] → actions[1,16]</code>; the deployment state machine constructs the same observation ordering used by training.</p>
+          </article>
+          <article class="evidence-card reveal">
+            <p class="source-line">COMMUNICATION LAYER</p>
+            <h3>Four CAN buses distribute 16 actuators.</h3>
+            <p>The design documentation estimates bus utilization per channel and uses dual STM32F407 controllers rather than hiding transport behind a single nominal “real-time” label.</p>
+          </article>
+          <article class="evidence-card reveal">
+            <p class="source-line">HARDWARE MEDIA</p>
+            <h3>Nominal locomotion and recovery are separately documented.</h3>
+            <p>Outdoor locomotion and short disturbance tests are retained as raw project videos, allowing behavior to be reviewed without an invented aggregate metric.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell two-col">
+        <div class="reveal">
+          <p class="eyebrow light">OUTDOOR DEPLOYMENT</p>
+          <h2>Locomotion beyond the training scene.</h2>
+          <p class="body-lg" style="color:#b6c0c5">The outdoor video records the platform on real pavement and grass. It is included as direct evidence, not as a claim of exhaustive terrain generalization.</p>
+          <div class="button-row"><a class="button" href="quadruped.html">Continue to the 55 kg EtherCAT quadruped →</a></div>
+        </div>
+        <div class="media-stage reveal">
+          <video controls muted playsinline preload="metadata" poster="assets/images/wheel-outdoor-poster.jpg">
+            <source src="assets/video/wheel-outdoor.mp4" type="video/mp4">
+          </video>
+          <div class="caption"><span>Outdoor wheel-legged locomotion.</span><span class="source">Hardware video · 2026</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>

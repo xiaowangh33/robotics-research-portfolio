@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Physics-informed learning and data-driven materials research by Wang Gufan.">
+  <title>Other Research · Wang Gufan</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="other">
+  <div data-site-header></div>
+  <main>
+    <section class="page-hero section-shell">
+      <div class="page-hero-grid">
+        <div>
+          <p class="page-kicker">OTHER RESEARCH · PHYSICS AND DATA</p>
+          <h1>Research beyond robotics, kept in a supporting role.</h1>
+          <p class="lede">These projects demonstrate scientific modeling, full-cycle prediction, data augmentation, and manuscript collaboration. They complement—but do not replace—the hardware locomotion evidence at the center of this portfolio.</p>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Project 01</dt><dd>Time-varying PINN for furnace temperature prediction</dd></div>
+          <div><dt>Project 02</dt><dd>Deep-learning workflow for magnesium alloy design</dd></div>
+          <div><dt>Authorship</dt><dd>Second author on each manuscript, per current CV</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell">
+        <article class="secondary-project">
+          <div class="secondary-visual reveal">
+            <video controls muted loop playsinline preload="metadata" poster="assets/images/pinn-poster.jpg">
+              <source src="assets/video/pinn-temperature.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="secondary-copy reveal">
+            <span class="index">RESEARCH PROJECT / 01</span>
+            <h2>Time-varying PINN for furnace heating.</h2>
+            <p class="scope">Physics-informed neural networks · Heat transfer · Full-cycle prediction</p>
+            <p>I extended a static-snapshot PINN workflow into a time-varying prediction process over the full heating cycle and supported nonuniform heat-source conditions. The implementation combines a 2D finite-difference reference path with a PINN trained using PDE, initial-condition, boundary-condition, and reference losses.</p>
+            <p>The portfolio does not attribute the manuscript’s broader optimization claims to the retained source where an implementation is not present. My contribution is limited to the dynamic prediction workflow described above.</p>
+            <div class="project-tags"><span class="tag">PINN</span><span class="tag">2D heat equation</span><span class="tag">Time-varying</span><span class="tag">Second author</span></div>
+          </div>
+        </article>
+
+        <article class="secondary-project reverse">
+          <div class="secondary-visual reveal">
+            <div class="model-board" role="img" aria-label="Schematic of the verified alloy modeling contribution: augmentation, Transformer, MLP, and stacking">
+              <span class="board-label">VERIFIED CONTRIBUTION SCOPE</span>
+              <div class="model-stack"><span>Data augmentation</span><span>Transformer regression</span><span>MLP regression</span><span>Stacking workflow</span></div>
+              <div class="board-output">Composition & process → mechanical-property prediction</div>
+            </div>
+          </div>
+          <div class="secondary-copy reveal">
+            <span class="index">RESEARCH PROJECT / 02</span>
+            <h2>Data-driven magnesium alloy design.</h2>
+            <p class="scope">Data augmentation · Transformer · MLP · Stacking</p>
+            <p>For a small materials dataset, I worked on augmentation and regression models including a Transformer, MLP, and stacking workflow to predict yield strength, elongation, and ultimate tensile strength from composition and process variables.</p>
+            <p>The manuscript contains a larger end-to-end design narrative. This page intentionally limits my personal contribution to components supported by the current CV and retained notebooks/scripts; it does not present unverified optimization code or experimental alloy results as my own implementation.</p>
+            <div class="project-tags"><span class="tag">Small-data learning</span><span class="tag">Transformer</span><span class="tag">Stacking</span><span class="tag">Second author</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">MANUSCRIPT-LINKED WORK</p></div>
+          <div>
+            <h2>Research outputs, stated at the level currently verifiable.</h2>
+            <p>Full author lists, English venue names, volume/pages, and persistent links are still needed before these entries should become formal citations.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <article class="publication">
+            <div class="status">ACCEPTED · DETAILS TO CONFIRM</div>
+            <div><h3>PINN-Based Material Temperature Forecasting and Heating-Furnace Curve Optimization</h3><p>English translation of the retained Chinese manuscript title.</p></div>
+            <div class="role">Second author · dynamic PINN workflow</div>
+          </article>
+          <article class="publication">
+            <div class="status">UNDER REVIEW</div>
+            <div><h3>Efficient Design of Magnesium Alloys with Superior Mechanical Properties Using Deep Learning</h3><p>Title taken from the retained English manuscript draft.</p></div>
+            <div class="role">Second author · data/model workflow</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell two-col">
+        <div class="reveal">
+          <p class="eyebrow light">TRANSFER TO ROBOTICS</p>
+          <h2>Useful methods, but the research identity remains physical control.</h2>
+        </div>
+        <div class="copy-stack reveal">
+          <p style="color:#b6c0c5">The PINN project trained me to encode governing structure and boundary conditions rather than rely only on labels. The alloy project trained me to be careful with small data, augmentation, validation, and model comparison.</p>
+          <p style="color:#b6c0c5">For PhD research, I want to bring that discipline back to robotics: learned estimation and control that respects dynamics, timestamps, computational budgets, and uncertainty on real hardware.</p>
+          <div class="button-row"><a class="button" href="index.html#core-work">Return to the core robotics work →</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>

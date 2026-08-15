@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Proposed research direction: timing-aware state prediction and confidence for reliable RL/MPC.">
+  <title>Proposed Research Direction · Wang Gufan</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="research">
+  <div data-site-header></div>
+  <main>
+    <section class="research-hero">
+      <div class="section-shell">
+        <span class="not-completed">PROPOSED RESEARCH DIRECTION · NO RESULTS CLAIMED</span>
+        <p class="eyebrow light">TIMING IS PART OF THE PLANT</p>
+        <h1>Short-horizon state prediction and calibrated confidence under delay, jitter, and missed cycles.</h1>
+        <p class="lede">A proposed study of how an RL or MPC locomotion controller should update its belief—and its risk tolerance—when sensing, actuation, and computation no longer arrive on the nominal schedule.</p>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell two-col">
+        <div class="sticky-label reveal">
+          <p class="eyebrow">HYPOTHESIS</p>
+          <p class="pullquote">Timing faults should be estimated as structured state uncertainty, not absorbed as anonymous noise.</p>
+        </div>
+        <div class="copy-stack reveal">
+          <p>Legged and wheel-legged controllers often assume that observation <em>x<sub>t</sub></em> and action <em>u<sub>t</sub></em> refer to the same current instant. Real systems violate this assumption: packets wait, sensors update asynchronously, computation time varies, and low-level loops may miss a cycle.</p>
+          <p>I propose to infer a short-horizon predictive distribution over the effective current state using recent state estimates, issued commands, action history, timestamps, age-of-information, and missed-cycle counters. The controller would receive both a state estimate and calibrated confidence.</p>
+          <p>The central test is whether this confidence signal improves graceful degradation: preserving useful motion when uncertainty is modest, while changing gait, speed, action magnitude, or planning risk when the estimate becomes unreliable.</p>
+          <div class="project-tags"><span class="tag proposed">Concept only</span><span class="tag proposed">No preliminary performance claim</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">FAILURE TAXONOMY</p></div>
+          <div><h2>Four timing failures that change the effective closed loop.</h2></div>
+        </div>
+        <div class="failure-grid">
+          <article class="failure-card reveal"><span>01</span><h3>Observation delay</h3><p>The controller acts on a state that was valid in the past; contact mode or body velocity may already have changed.</p></article>
+          <article class="failure-card reveal"><span>02</span><h3>Action delay</h3><p>The plant receives a command later than the policy assumes, changing phase and effective feedback gain.</p></article>
+          <article class="failure-card reveal"><span>03</span><h3>Jitter</h3><p>Variable inference, transport, and actuator timing prevents a fixed-delay compensator from matching every cycle.</p></article>
+          <article class="failure-card reveal"><span>04</span><h3>Missed cycles</h3><p>A held or skipped command changes the action history and may push the robot across a contact or stability boundary.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow light">PROPOSED METHOD</p></div>
+          <div>
+            <h2>Predict, calibrate, then let confidence influence control.</h2>
+            <p>This is a research plan, not an implemented system. The blocks define the intended experiment and the interfaces that would need to be validated.</p>
+          </div>
+        </div>
+        <div class="method-flow reveal">
+          <article class="method-step"><span class="method-num">INPUT / 01</span><h3>Timestamped history</h3><p>Recent states, commands, action history, age-of-information, cycle duration, and missed-update indicators.</p></article>
+          <article class="method-step"><span class="method-num">ESTIMATE / 02</span><h3>Short-horizon distribution</h3><p>Predict the effective current or near-future state together with epistemic and/or aleatoric uncertainty.</p></article>
+          <article class="method-step"><span class="method-num">CALIBRATE / 03</span><h3>Reliable confidence</h3><p>Test whether predicted intervals match observed error under both in-distribution and shifted timing conditions.</p></article>
+          <article class="method-step"><span class="method-num">CONTROL / 04</span><h3>RL or risk-aware MPC</h3><p>Use state and confidence as policy context or within chance/risk constraints, while respecting compute deadlines.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell two-col reverse">
+        <div class="reveal">
+          <p class="eyebrow">EVALUATION PLAN</p>
+          <h2>Test recovery, worst cases, calibration, and added latency.</h2>
+          <p class="body-lg">Average tracking alone is not enough. A timing-aware controller should be evaluated on whether it recognizes when its belief is weak and whether that recognition changes physical outcomes.</p>
+        </div>
+        <div class="evaluation-table reveal">
+          <div class="evaluation-row"><strong>PLATFORMS</strong><p>Begin in simulation, then validate on a wheel-legged or quadruped platform with instrumented policy, transport, and actuator timing.</p></div>
+          <div class="evaluation-row"><strong>PERTURBATIONS</strong><p>Controlled observation delay, action delay, variable jitter, bursty missed cycles, and combinations with mass/friction/actuator mismatch.</p></div>
+          <div class="evaluation-row"><strong>BASELINES</strong><p>Domain-randomized PPO, recurrent policy, deterministic state predictor, fixed-delay compensation, and an MPC/RL controller without confidence input.</p></div>
+          <div class="evaluation-row"><strong>PHYSICAL METRICS</strong><p>Fall or task success, tracking error, recovery time, intervention threshold, worst-case outcome, and degradation as timing faults grow.</p></div>
+          <div class="evaluation-row"><strong>ESTIMATION METRICS</strong><p>Prediction error, interval coverage, calibration error, out-of-distribution detection, compute time, and additional closed-loop latency.</p></div>
+          <div class="evaluation-row"><strong>ABLATIONS</strong><p>Remove timestamps, action history, missed-cycle counters, or confidence-conditioned control to identify which components matter.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">DESIGN CONSTRAINTS</p></div>
+          <div><h2>The estimator cannot solve timing failure by creating more timing failure.</h2></div>
+        </div>
+        <div class="evidence-grid">
+          <article class="evidence-card reveal"><p class="source-line">REAL-TIME BUDGET</p><h3>Bound worst-case compute.</h3><p>Report not only average estimator runtime but its tail latency and how it interacts with policy/MPC deadlines.</p></article>
+          <article class="evidence-card reveal"><p class="source-line">TIMESTAMP SEMANTICS</p><h3>Define when every signal was valid.</h3><p>Sensor acquisition, estimator output, command issue, bus transmission, and actuator application should not share an ambiguous timestamp.</p></article>
+          <article class="evidence-card reveal"><p class="source-line">CALIBRATION</p><h3>Confidence must predict error.</h3><p>A numerical variance is only useful if it is calibrated under both nominal data and timing shifts not seen during training.</p></article>
+          <article class="evidence-card reveal"><p class="source-line">GRACEFUL DEGRADATION</p><h3>Uncertainty must change action.</h3><p>The system should expose a decision rule: continue, reduce speed, switch behavior, replan, or stop as uncertainty increases.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="orl-fit" class="section dark">
+      <div class="section-shell">
+        <div class="fit-header reveal">
+          <p class="eyebrow light">ADVISOR-SPECIFIC RESEARCH FIT</p>
+          <h2 data-fit-short>FSU · OPTIMAL ROBOTICS LABORATORY</h2>
+          <p class="body-lg" style="color:#b6c0c5" data-fit-intro>ORL is a particularly strong fit because its work treats locomotion as a coupled problem in dynamics, optimization, adaptation, and physical failure—not as policy inference in isolation.</p>
+        </div>
+        <div class="fit-grid reveal" data-fit-connections></div>
+        <p class="fit-closing reveal" data-fit-closing>The intended contribution is narrow and testable: determine when timing uncertainty should change the controller’s belief, action, or risk tolerance, then validate the answer on real legged and wheel-legged hardware.</p>
+        <p class="small" style="margin-top:30px;color:#84929a">Personalization target: Christian Hubicki, Optimal Robotics Laboratory, Florida State University. Project evidence remains independent of this replaceable fit profile.</p>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell two-col">
+        <div class="reveal"><p class="eyebrow">WHY I CAN START THIS WORK</p><h2>The proposed question is new; the experimental habits are already in place.</h2></div>
+        <div class="copy-stack reveal">
+          <p>I have already worked across 50 Hz learned policies, shared-memory processes, dual-MCU synchronization, 500 Hz CAN motor refresh, 1 kHz joint-control computation, and a 2 kHz EtherCAT bus. I have debugged policies that were stable in simulation but unreliable under physical disturbances, delayed actuation, static friction, and model error.</p>
+          <p>What I have <strong>not</strong> yet completed is the proposed probabilistic estimator, calibration study, or risk-aware RL/MPC integration. Those are the PhD research questions—not retroactive labels placed on earlier engineering work.</p>
+          <div class="button-row"><a class="button" href="wheel-legged.html">Review the wheel-leg evidence</a><a class="button ghost" href="quadruped.html">Review the quadruped evidence</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>

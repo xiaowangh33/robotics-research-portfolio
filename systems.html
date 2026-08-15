@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supporting real-time systems and field robotics work by Wang Gufan.">
+  <title>Real-Time Systems & Field Robotics · Wang Gufan</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="systems">
+  <div data-site-header></div>
+  <main>
+    <section class="page-hero section-shell">
+      <div class="page-hero-grid">
+        <div>
+          <p class="page-kicker">SUPPORTING WORK · SYSTEMS AND DEPLOYMENT</p>
+          <h1>Robotics below the policy—and outside the laboratory.</h1>
+          <p class="lede">These projects support the core locomotion narrative in two ways: migrating a 20-motor control system onto Linux/ROS 2/EtherCAT, and deploying perception on a magnetic inspection robot in an operational hydropower environment.</p>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Focus</dt><dd>Real-time integration and field variability</dd></div>
+          <div><dt>Included</dt><dd>Upper-limb/exoskeleton system · wall-climbing inspection robot</dd></div>
+          <div><dt>Evidence rule</dt><dd>Only source- or media-supported claims</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell">
+        <article class="secondary-project">
+          <div class="secondary-visual reveal">
+            <img src="assets/images/upper-limb-system.png" alt="Diagram of the dual upper-limb and lower-body robotic system">
+          </div>
+          <div class="secondary-copy reveal">
+            <span class="index">SYSTEMS PROJECT / 01</span>
+            <h2>20-motor upper-limb control migration.</h2>
+            <p class="scope">Ubuntu · ROS 2 · EtherCAT · Hardware integration</p>
+            <p>I migrated a 20-motor Windows-oriented control workflow toward Ubuntu and ROS 2, adapting EtherCAT master/slave communication and integrating a control card without native Linux support.</p>
+            <p>The value of the project was architectural: understanding what must remain deterministic when vendor interfaces, operating systems, bus configuration, and application software change together. It strengthened the fieldbus experience later used in quadruped deployment.</p>
+            <div class="project-tags"><span class="tag">20 motors</span><span class="tag">ROS 2 migration</span><span class="tag">EtherCAT</span><span class="tag verified">Hardware media</span></div>
+          </div>
+        </article>
+        <div class="media-stage reveal" style="margin-top:-35px">
+          <video controls muted playsinline preload="metadata" poster="assets/images/upper-limb-poster.jpg">
+            <source src="assets/video/upper-limb-demo.mp4" type="video/mp4">
+          </video>
+          <div class="caption"><span><strong>Hardware record.</strong> Motion of the integrated multi-motor system.</span><span class="source">Original project video</span></div>
+        </div>
+
+        <article class="secondary-project reverse">
+          <div class="secondary-visual reveal">
+            <img src="assets/images/climbing-field.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility">
+          </div>
+          <div class="secondary-copy reveal">
+            <span class="index">FIELD ROBOTICS PROJECT / 02</span>
+            <h2>Magnetic wall-climbing inspection robot.</h2>
+            <p class="scope">Field deployment · Visual inspection · Dataset and model comparison</p>
+            <p>I worked on a visual inspection pipeline for a magnetic climbing robot and participated in field deployment at the Wudongde Hydropower Station. The setting introduced dust, vibration, illumination change, viewpoint shift, and limited access—conditions that make “works on a validation split” an incomplete definition of reliability.</p>
+            <p>The archive supports individual YOLOv11, RT-DETR, and related model runs plus field media. Because it does not contain a measured end-to-end benchmark for the combined inspection system, this page does not report an aggregate accuracy figure.</p>
+            <div class="project-tags"><span class="tag verified">Field verified</span><span class="tag">Hydropower inspection</span><span class="tag">Object detection</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell two-col">
+        <div class="reveal">
+          <p class="eyebrow light">FIELD MECHANICS</p>
+          <h2>Mobility remained a physical systems problem.</h2>
+          <p class="body-lg" style="color:#b6c0c5">The robot’s ability to negotiate a right-angle transition is shown directly. For this portfolio, the field robot is not used to overstate perception performance; it demonstrates that sensing, adhesion, motion, and operating conditions must be evaluated together.</p>
+        </div>
+        <div class="media-stage reveal">
+          <video controls muted playsinline preload="metadata" poster="assets/images/climbing-corner-poster.jpg">
+            <source src="assets/video/climbing-corner.mp4" type="video/mp4">
+          </video>
+          <div class="caption"><span>Inverted right-angle transition on hardware.</span><span class="source">Original project video</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">WHY THESE PROJECTS BELONG</p></div>
+          <div><h2>They complete the reliability stack around locomotion.</h2></div>
+        </div>
+        <div class="evidence-chain reveal">
+          <article class="evidence-step"><span>PLATFORM SOFTWARE</span><h3>Operating-system and API migration</h3><p>Control behavior depends on the software path that carries commands, not only the control law that generated them.</p></article>
+          <article class="evidence-step"><span>REAL-TIME TRANSPORT</span><h3>EtherCAT integration</h3><p>Fieldbus configuration, drive state, and update rate create physical consequences when they drift from the intended schedule.</p></article>
+          <article class="evidence-step"><span>FIELD VARIABILITY</span><h3>Deployment outside controlled scenes</h3><p>Lighting, dust, vibration, traction, and access constraints change what can be sensed, verified, and recovered.</p></article>
+        </div>
+        <div class="button-row" style="margin-top:50px"><a class="button" href="research.html">See how these experiences shape the proposed research →</a><a class="button ghost" href="other-research.html">View PINN and alloy research →</a></div>
+      </div>
+    </section>
+  </main>
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>

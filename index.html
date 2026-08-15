@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wang Gufan's robotics research portfolio: reliable learned and model-based control beyond simulation assumptions.">
+  <title>Wang Gufan · Robotics Research Portfolio</title>
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" data-page="home">
+  <div data-site-header></div>
+
+  <main>
+    <section class="home-hero section-shell">
+      <div class="home-hero-grid">
+        <div>
+          <p class="eyebrow">ROBOTICS RESEARCH · REAL-TIME CONTROL · SIM2REAL</p>
+          <h1>When timing slips,<span class="line-two">the plant changes.</span></h1>
+          <p class="lede">I build locomotion systems at the boundary between learned policies, embedded control, and real hardware—and study what breaks when their assumptions stop agreeing.</p>
+          <div class="button-row">
+            <a class="button" href="#core-work">Start with hardware evidence ↓</a>
+            <a class="button ghost" href="research.html">Read the proposed direction</a>
+          </div>
+        </div>
+        <aside class="hero-note">
+          <p class="eyebrow">FALL 2027 PHD FOCUS</p>
+          <p>Reliable, timing-aware control for legged and wheel-legged robots under model mismatch, stale sensing, actuation delay, jitter, and missed cycles.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="research-question section-shell reveal">
+      <div class="question-card">
+        <span class="index">RESEARCH QUESTION / 01</span>
+        <blockquote>How can learned and model-based robot controllers remain reliable when real-world dynamics, sensing, actuation, and timing depart from the assumptions used in simulation and planning?</blockquote>
+      </div>
+    </section>
+
+    <section class="section-shell reveal" aria-label="Wheel-legged robot field evidence">
+      <div class="hero-media">
+        <video controls muted playsinline preload="metadata" poster="assets/images/wheel-outdoor-poster.jpg">
+          <source src="assets/video/wheel-outdoor.mp4" type="video/mp4">
+        </video>
+        <div class="media-overlay">
+          <div><strong>25 kg wheel-legged robot</strong><span>Outdoor hardware deployment · 2026</span></div>
+          <span class="media-tag">Real robot video / with controls</span>
+        </div>
+      </div>
+      <div class="metric-strip">
+        <div class="metric"><strong>25 kg</strong><span>Wheel-legged platform</span></div>
+        <div class="metric"><strong>16</strong><span>Actuators · 12 joints + 4 wheels</span></div>
+        <div class="metric"><strong>50 Hz</strong><span>Learned locomotion policy</span></div>
+        <div class="metric"><strong>500 Hz</strong><span>Per-motor CAN refresh</span></div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow light">RESEARCH POSITION</p></div>
+          <div>
+            <h2>Reliability is a property of the whole loop.</h2>
+            <p>A policy may be correct for its simulator and still fail because the state is old, the action arrives late, the actuator model is wrong, or two devices disagree about which control epoch they belong to.</p>
+          </div>
+        </div>
+        <div class="principle-grid reveal">
+          <article class="principle">
+            <span class="num">01 / MISMATCH</span>
+            <h3>Mismatch is structured.</h3>
+            <p>Mass, friction, actuator delay, joint offsets, static friction, gains, and coordinate conventions leave different signatures. Instrumentation should help distinguish them.</p>
+          </article>
+          <article class="principle">
+            <span class="num">02 / TIMING</span>
+            <h3>Timing is part of the plant.</h3>
+            <p>At 50 Hz policy inference over 500 Hz–2 kHz lower-level loops, observation age and action age alter the effective closed-loop dynamics.</p>
+          </article>
+          <article class="principle">
+            <span class="num">03 / CONFIDENCE</span>
+            <h3>Uncertainty should change behavior.</h3>
+            <p>A controller needs more than a point prediction. Calibrated confidence could determine when to continue, slow down, replan, or choose a lower-risk action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="core-work" class="section">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">CORE HARDWARE WORK</p></div>
+          <div>
+            <h2>Two robots. One continuous research problem.</h2>
+            <p>The projects are presented as a sequence: first, make distributed RL locomotion survive physical disturbances; then, trace model and actuator mismatch through a faster EtherCAT torque-control stack.</p>
+          </div>
+        </div>
+        <div class="project-grid">
+          <a class="project-card reveal" href="wheel-legged.html">
+            <div class="project-image"><img src="assets/images/wheel-disturbance-poster.jpg" alt="25 kg wheel-legged robot during a disturbance test"></div>
+            <div class="project-copy">
+              <div class="project-topline"><span>CORE PROJECT 01</span><span>May–Aug 2026</span></div>
+              <h3>25 kg wheel-leg RL Sim2Real</h3>
+              <p>From simulation-stable PPO to real standing, rolling locomotion, stair behavior, and kick recovery through dynamics randomization, multi-rate integration, and observation-freshness safeguards.</p>
+              <div class="project-tags">
+                <span class="tag verified">Hardware verified</span><span class="tag">PPO</span><span class="tag">CAN</span><span class="tag">Dual MCU</span>
+              </div>
+            </div>
+          </a>
+          <a class="project-card reveal" href="quadruped.html">
+            <div class="project-image"><img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped robot in the laboratory"></div>
+            <div class="project-copy">
+              <div class="project-topline"><span>CORE PROJECT 02</span><span>Sep 2025–Jun 2026</span></div>
+              <h3>55 kg quadruped EtherCAT Sim2Real</h3>
+              <p>A complete software and control path from an RL policy to 12 Profile-Torque drives, with diagnosis centered on actuator delay, static friction, model parameters, and desired-versus-measured joint motion.</p>
+              <div class="project-tags">
+                <span class="tag verified">Hardware verified</span><span class="tag">EtherCAT</span><span class="tag">Torque control</span><span class="tag">2 kHz bus</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">THE EVIDENCE CHAIN</p></div>
+          <div><h2>The research direction grew out of deployment work—not a detached topic choice.</h2></div>
+        </div>
+        <div class="evidence-chain reveal">
+          <article class="evidence-step">
+            <span>OBSERVED</span>
+            <h3>Simulation success did not identify the hardware failure mode.</h3>
+            <p>Oscillation after impact, delayed joint response, static friction, and command/measurement mismatch looked different on the machine than in the nominal model.</p>
+          </article>
+          <article class="evidence-step">
+            <span>INSTRUMENTED</span>
+            <h3>The communication path became part of the experiment.</h3>
+            <p>Timestamped epochs, shared-memory interfaces, desired/measured logging, motor-feedback freshness, and explicit policy tensor contracts made failures traceable.</p>
+          </article>
+          <article class="evidence-step">
+            <span>REFRAMED</span>
+            <h3>Delay and jitter should become state, not hidden noise.</h3>
+            <p>The next question is whether a short-horizon predictor can estimate both current state and confidence, then let RL or MPC respond to the risk.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proposal-band">
+      <div class="section-shell proposal-grid reveal">
+        <div>
+          <span class="proposal-label">PROPOSED RESEARCH · NOT COMPLETED WORK</span>
+          <h2>Timing-aware state prediction and confidence for RL/MPC.</h2>
+        </div>
+        <div>
+          <p class="lede">Estimate a short-horizon distribution over the robot state from recent observations, commands, action history, and timing metadata—then use calibrated uncertainty to change control decisions under stale sensing and delayed actuation.</p>
+          <div class="button-row"><a class="button" href="research.html">See hypothesis, method, and evaluation →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark">
+      <div class="section-shell fit-preview reveal">
+        <div>
+          <p class="eyebrow light">RESEARCH FIT</p>
+          <h2 data-fit-short>FSU · OPTIMAL ROBOTICS LABORATORY</h2>
+        </div>
+        <div class="fit-copy">
+          <p data-fit-intro>ORL is a particularly strong fit because its work treats locomotion as a coupled problem in dynamics, optimization, adaptation, and physical failure—not as policy inference in isolation.</p>
+          <p class="small">Personalized for Christian Hubicki / ORL. This module is isolated from the project evidence so the portfolio remains reusable for other PhD applications.</p>
+          <div class="button-row"><a class="button" href="research.html#orl-fit">Read the specific research connections →</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+  <script src="js/fit-profile.js"></script>
+  <script src="js/site.js?v=20260815"></script>
+</body>
+</html>
