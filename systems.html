@@ -19,6 +19,10 @@
           <h1>Systems work around the controller.</h1>
           <p class="lede supporting-intro">These projects broaden the deployment context: migrating a 20-motor control system to Ubuntu, ROS 2, and EtherCAT, and participating in field work on a magnetic climbing inspection robot.</p>
         </div>
+        <figure class="hero-media">
+          <img src="assets/images/climbing-field.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility">
+          <figcaption><strong>Field setting.</strong> Magnetic inspection robot at the hydropower deployment site.</figcaption>
+        </figure>
         <ul class="project-summary">
           <li><span>Systems</span><div>20 motor · Ubuntu · ROS 2 · EtherCAT</div></li>
           <li><span>Field work</span><div>Magnetic climbing robot · visual inspection</div></li>
@@ -29,20 +33,7 @@
 
     <section class="section soft">
       <div class="section-shell">
-        <article class="system-project">
-          <div>
-            <p class="eyebrow">Systems project</p>
-            <h2>20-motor control migration and integration.</h2>
-            <p>I migrated a Windows-oriented 20-motor control workflow toward Ubuntu and ROS 2, adapting EtherCAT communication and integrating a control card without native Linux support. The work connected data collection and control-command paths to the ROS 2 system.</p>
-            <p class="scope-note">The retained package includes project media and integration assets. It does not support a public latency claim, so no timing number is reported here.</p>
-          </div>
-          <div class="media-grid">
-            <figure><img src="assets/images/upper-limb-system.png" alt="Dual upper-limb and lower-body robot system"><figcaption><strong>Integrated system.</strong> Retained project diagram of the multi-motor platform.</figcaption></figure>
-            <figure><video controls muted playsinline preload="metadata" poster="assets/images/upper-limb-poster.jpg"><source src="assets/video/upper-limb-demo.mp4" type="video/mp4"></video><figcaption><strong>Hardware motion.</strong> Representative record of the integrated system.</figcaption></figure>
-          </div>
-        </article>
-
-        <div class="section-heading" style="margin-top:18px">
+        <div class="section-heading">
           <p class="eyebrow">Migration architecture</p>
           <div><h2>Application and fieldbus responsibilities made explicit.</h2><p>The figure records the system boundaries described in the available CV and materials. It does not infer an undocumented servo rate or driver implementation.</p></div>
         </div>
@@ -97,6 +88,18 @@
           </svg>
           <figcaption>Editable summary of the documented migration: Ubuntu/ROS 2 application → control-card adaptation → EtherCAT master → 20 motor drives → mechanism, with feedback and diagnostics returned to the application layer.</figcaption>
         </figure>
+        <article class="system-project">
+          <div>
+            <p class="eyebrow">Systems project</p>
+            <h2>20-motor control migration and integration.</h2>
+            <p>I migrated a Windows-oriented 20-motor control workflow toward Ubuntu and ROS 2, adapting EtherCAT communication and integrating a control card without native Linux support. The work connected data collection and control-command paths to the ROS 2 system.</p>
+            <p class="scope-note">The retained package includes project media and integration assets. It does not support a public latency claim, so no timing number is reported here.</p>
+          </div>
+          <div class="media-grid">
+            <figure><img src="assets/images/upper-limb-system.png" alt="Dual upper-limb and lower-body robot system"><figcaption><strong>Integrated system.</strong> Retained project diagram of the multi-motor platform.</figcaption></figure>
+            <figure><video controls muted playsinline preload="metadata" poster="assets/images/upper-limb-poster.jpg"><source src="assets/video/upper-limb-demo.mp4" type="video/mp4"></video><figcaption><strong>Hardware motion.</strong> Representative record of the integrated system.</figcaption></figure>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -109,8 +112,7 @@
             <p>I contributed to a visual inspection workflow and field deployment at the Wudongde Hydropower Station. Dust, vibration, illumination variation, viewpoint change, and access constraints made the physical setting an important part of the work.</p>
             <p>The available archive contains individual model runs and field media; it does not establish a public end-to-end accuracy result for the combined system.</p>
           </div>
-          <div class="media-grid">
-            <figure><img src="assets/images/climbing-field.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility"><figcaption><strong>Field setting.</strong> Magnetic inspection robot at the hydropower deployment site.</figcaption></figure>
+          <div class="single-media">
             <figure><img src="assets/images/climbing-corner-poster.jpg" alt="Magnetic climbing robot transitioning across a right angle"><figcaption><strong>Mechanical transition.</strong> Retained record of an inverted right-angle transition.</figcaption></figure>
           </div>
         </article>

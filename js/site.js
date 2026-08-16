@@ -58,6 +58,10 @@
       </footer>`;
   }
 
+  const priorityArchitecture = document.querySelector("[data-priority-architecture]");
+  const pageHero = document.querySelector(".research-hero");
+  if (priorityArchitecture && pageHero) pageHero.insertAdjacentElement("afterend", priorityArchitecture);
+
   const revealObserver = "IntersectionObserver" in window
     ? new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

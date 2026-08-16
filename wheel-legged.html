@@ -19,29 +19,16 @@
           <h1>25 kg wheel-legged robot</h1>
           <p class="lede">A PPO locomotion policy was deployed through a multi-rate stack spanning ONNX inference, Linux shared memory, two STM32F407 controllers, four CAN buses, and 16 actuators.</p>
         </div>
+        <figure class="hero-media">
+          <img src="assets/images/wheel-hardware.jpg" alt="Wheel-legged robot on pavement during a hardware test">
+          <figcaption><strong>Wheel-legged platform.</strong> Outdoor hardware setup with exposed electronics and wheel-leg mechanism.</figcaption>
+        </figure>
         <ul class="project-summary">
           <li><span>Period</span><div>May-August 2026</div></li>
           <li><span>Platform</span><div>25 kg · 16 actuators</div></li>
           <li><span>Policy</span><div>57-D observation → 16-D action · 50 Hz</div></li>
           <li><span>Evidence</span><div>Hardware standing, locomotion, stairs, and disturbance recovery</div></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="section soft">
-      <div class="section-shell role-grid">
-        <div>
-          <p class="eyebrow">My Role</p>
-          <h2>Control stack, policy deployment, and Sim2Real diagnosis.</h2>
-        </div>
-        <div>
-          <ul class="role-list">
-            <li><strong>RL workflow</strong>PPO task configuration, dynamics randomization, ONNX export, and deployment-side tensor alignment.</li>
-            <li><strong>System integration</strong>C++ state machine, shared-memory handoff, Python WDP4 bridge, dual-MCU coordination, and CAN actuator control.</li>
-            <li><strong>Diagnosis</strong>Investigated disturbance-induced oscillation through deployment checks, policy retraining, and retained hardware tests.</li>
-          </ul>
-          <p class="scope-note">The video and images below are qualitative hardware records; no aggregate success rate is claimed.</p>
-        </div>
       </div>
     </section>
 
@@ -134,6 +121,23 @@
     </section>
 
     <section class="section soft">
+      <div class="section-shell role-grid">
+        <div>
+          <p class="eyebrow">My Role</p>
+          <h2>Control stack, policy deployment, and Sim2Real diagnosis.</h2>
+        </div>
+        <div>
+          <ul class="role-list">
+            <li><strong>RL workflow</strong>PPO task configuration, dynamics randomization, ONNX export, and deployment-side tensor alignment.</li>
+            <li><strong>System integration</strong>C++ state machine, shared-memory handoff, Python WDP4 bridge, dual-MCU coordination, and CAN actuator control.</li>
+            <li><strong>Diagnosis</strong>Investigated disturbance-induced oscillation through deployment checks, policy retraining, and retained hardware tests.</li>
+          </ul>
+          <p class="scope-note">The video and images below are qualitative hardware records; no aggregate success rate is claimed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">Sim2Real and debugging</p>
@@ -153,8 +157,7 @@
           <p class="eyebrow">Hardware record</p>
           <div><h2>Robot, outdoor test, and disturbance recovery.</h2><p>Still images make the platform and test setting visible; the representative video remains available for reviewing behavior.</p></div>
         </div>
-        <div class="media-grid">
-          <figure><img src="assets/images/wheel-hardware.jpg" alt="Wheel-legged robot on pavement during a hardware test"><figcaption><strong>Wheel-legged platform.</strong> Outdoor hardware setup with exposed electronics and wheel-leg mechanism.</figcaption></figure>
+        <div class="single-media">
           <figure><img src="assets/images/wheel-outdoor-still.jpg" alt="Wheel-legged robot traveling on an outdoor path"><figcaption><strong>Outdoor locomotion.</strong> A retained frame from a field test on paved terrain.</figcaption></figure>
         </div>
         <div class="single-media" style="margin-top:18px">

@@ -19,29 +19,16 @@
           <h1>55 kg quadruped</h1>
           <p class="lede">I worked on the software and control path from a PPO locomotion policy to 12 EtherCAT drives in CiA-402 Profile Torque mode, with joint-level recordings used to investigate deployment mismatch.</p>
         </div>
+        <figure class="hero-media">
+          <img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped standing in a laboratory">
+          <figcaption><strong>55 kg quadruped.</strong> Hardware platform used for the EtherCAT deployment work.</figcaption>
+        </figure>
         <ul class="project-summary">
           <li><span>Period</span><div>September 2025-June 2026</div></li>
           <li><span>Platform</span><div>55 kg · 12 actuators</div></li>
           <li><span>Policy</span><div>45-D observation → 12-D action · implemented at 50 Hz</div></li>
           <li><span>Evidence</span><div>Retained walking, PACE data collection, and joint tracking records</div></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="section soft">
-      <div class="section-shell role-grid">
-        <div>
-          <p class="eyebrow">My Role</p>
-          <h2>Deployment software, real-time control integration, and mismatch diagnosis.</h2>
-        </div>
-        <div>
-          <ul class="role-list">
-            <li><strong>Policy path</strong>ONNX runner, 45-D observation construction, action mapping, and state-machine integration.</li>
-            <li><strong>Low-level path</strong>Joint target handoff, 1 kHz PD computation, SOEM EtherCAT exchange, and CiA-402 drive-state handling.</li>
-            <li><strong>Diagnosis</strong>Desired-versus-measured joint recording, model/interface checks, and iteration around delay, friction, and actuation behavior.</li>
-          </ul>
-          <p class="scope-note">The archived project contains several model/configuration versions. This page shows the hardware path and records, not an unverified aggregate performance metric.</p>
-        </div>
       </div>
     </section>
 
@@ -140,6 +127,23 @@
     </section>
 
     <section class="section soft">
+      <div class="section-shell role-grid">
+        <div>
+          <p class="eyebrow">My Role</p>
+          <h2>Deployment software, real-time control integration, and mismatch diagnosis.</h2>
+        </div>
+        <div>
+          <ul class="role-list">
+            <li><strong>Policy path</strong>ONNX runner, 45-D observation construction, action mapping, and state-machine integration.</li>
+            <li><strong>Low-level path</strong>Joint target handoff, 1 kHz PD computation, SOEM EtherCAT exchange, and CiA-402 drive-state handling.</li>
+            <li><strong>Diagnosis</strong>Desired-versus-measured joint recording, model/interface checks, and iteration around delay, friction, and actuation behavior.</li>
+          </ul>
+          <p class="scope-note">The archived project contains several model/configuration versions. This page shows the hardware path and records, not an unverified aggregate performance metric.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">Diagnostic loop</p>
@@ -159,12 +163,11 @@
           <p class="eyebrow">Hardware record</p>
           <div><h2>Platform, test setup, and joint tracking.</h2><p>The images show the physical platform and bench context. The curve is a retained command-versus-measurement diagnostic, not a summarized tracking score.</p></div>
         </div>
-        <div class="media-grid equal">
-          <figure><img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped standing in a laboratory"><figcaption><strong>55 kg quadruped.</strong> Hardware platform used for the EtherCAT deployment work.</figcaption></figure>
+        <div class="media-grid">
           <figure><img src="assets/images/quadruped-bench.jpg" alt="Quadruped suspended in a laboratory bench setup"><figcaption><strong>Bench setup.</strong> A retained image from controlled work around the platform.</figcaption></figure>
-        </div>
-        <div class="media-grid" style="margin-top:18px">
           <figure><img class="chart-image" src="assets/images/quadruped-joint-tracking.png" alt="Desired and measured front-left quadruped joint tracking curves"><figcaption><strong>Desired versus measured joints.</strong> Retained PACE chirp visualization for the front-left leg.</figcaption></figure>
+        </div>
+        <div class="single-media" style="margin-top:18px">
           <figure><video controls muted playsinline preload="metadata" poster="assets/images/quadruped-pace-poster.jpg"><source src="assets/video/quadruped-pace.mp4" type="video/mp4"></video><figcaption><strong>PACE data collection.</strong> Representative video associated with joint-level diagnosis.</figcaption></figure>
         </div>
       </div>

@@ -133,6 +133,8 @@
     "Outdoor hardware setup with exposed electronics and wheel-leg mechanism.": "带有外露电子部件和轮足机构的户外硬件测试设置。",
     "Outdoor locomotion.": "户外运动。",
     "A retained frame from a field test on paved terrain.": "铺装地面现场测试的留存画面。",
+    "Deployment work that motivates the proposed research questions.": "为拟议研究问题提供动机的部署工作。",
+    "Context for the primary robotics work in this portfolio.": "本作品集中核心机器人工作的背景。",
     "Disturbance test.": "扰动测试。",
     "Retained hardware video after revised randomization and deployment iteration.": "调整随机化与部署迭代后的留存硬件视频。",
     "What I learned": "我的收获",
