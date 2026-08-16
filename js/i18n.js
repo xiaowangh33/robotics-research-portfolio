@@ -1,0 +1,473 @@
+(function () {
+  "use strict";
+
+  const storageKey = "portfolio-language";
+  const originalNodes = new WeakMap();
+
+  // Keep project terminology in English where it is a model, protocol, or formal standard.
+  // The map intentionally translates visible prose node-by-node, so the English source
+  // remains the single maintained version of each page.
+  const zh = {
+    "Overview": "概览",
+    "Wheel-leg": "轮足机器人",
+    "Quadruped": "四足机器人",
+    "Systems": "系统工程",
+    "Research interests": "研究兴趣",
+    "Additional work": "补充工作",
+    "Download CV": "下载简历",
+    "Download CV (PDF)": "下载简历（PDF）",
+    "Toggle navigation": "切换导航",
+    "Contact": "联系",
+    "Back to top ↑": "返回顶部 ↑",
+    "Selected code available upon request.": "精选代码可按需提供。",
+    "Robotics research portfolio · project facts are supported by project records and retained media": "机器人研究作品集 · 项目事实由项目记录与留存材料支持",
+    "Robotics engineering · B.Eng. candidate": "机器人工程 · 学士在读",
+    "University of Science and Technology Beijing": "北京科技大学",
+    "B.Eng. Robotics Engineering · expected 2027": "机器人工程学士 · 预计 2027 年毕业",
+
+    "Robotics · real-robot control · Sim2Real": "机器人学 · 真机控制 · 仿真到现实",
+    "Robotics Research Portfolio": "机器人研究作品集",
+    "I am an undergraduate robotics engineering student working on reliable locomotion, Sim2Real deployment, and real-time uncertainty in physical robot systems. My recent work spans a 25 kg wheel-legged robot and a 55 kg EtherCAT quadruped.": "我是一名机器人工程本科生，关注真实机器人系统中的可靠运动、仿真到现实部署与实时不确定性。近期工作包括 25 kg 轮足机器人和 55 kg EtherCAT 四足机器人。",
+    "View selected projects": "查看精选项目",
+    "Research Interests": "研究兴趣",
+    "Reliable legged and wheel-legged locomotion when model mismatch, sensing age, actuation delay, and scheduling variability affect the closed loop.": "当模型失配、感知时效、执行延迟和调度波动影响闭环时，实现可靠的足式与轮足运动。",
+    "RESEARCH THEME": "研究主题",
+    "When timing slips, the plant changes. I am interested in making that systems fact measurable and useful for control.": "当时序发生偏移，被控对象也随之改变。我希望将这一系统事实变得可测量，并用于控制。",
+    "Selected hardware work": "精选硬件工作",
+    "Two control stacks, examined on real robots.": "两套控制栈，均在真实机器人上检验。",
+    "These project pages focus on what I built, how the control path was instrumented, and the evidence retained from deployment.": "这些项目页聚焦于我搭建了什么、如何对控制链路进行仪器化，以及部署中保留了哪些证据。",
+    "Core project 01": "核心项目 01",
+    "May-Aug 2026": "2026 年 5–8 月",
+    "25 kg wheel-legged robot": "25 kg 轮足机器人",
+    "PPO deployment through ONNX, Linux shared memory, dual MCUs, and four CAN buses for 16 actuators.": "通过 ONNX、Linux 共享内存、双 MCU 和四条 CAN 总线部署 PPO，驱动 16 个执行器。",
+    "Hardware deployment": "硬件部署",
+    "Core project 02": "核心项目 02",
+    "Sep 2025-Jun 2026": "2025 年 9 月–2026 年 6 月",
+    "55 kg EtherCAT quadruped": "55 kg EtherCAT 四足机器人",
+    "From a PPO policy to 12 CiA-402 torque drives, with desired-versus-measured joint traces used for diagnosis.": "从 PPO 策略到 12 个 CiA-402 力矩驱动器，并使用期望—实测关节轨迹进行诊断。",
+    "Torque control": "力矩控制",
+    "wheel-legged platform": "轮足平台",
+    "CAN-controlled actuators": "CAN 控制执行器",
+    "EtherCAT quadruped platform": "EtherCAT 四足平台",
+    "CiA-402 torque drives": "CiA-402 力矩驱动器",
+    "From deployment to research": "从部署走向研究",
+    "Questions I hope to explore in doctoral study.": "我希望在博士阶段探索的问题。",
+    "Deployment experience has made me interested in controllers that account for what was observed, when it was observed, and how confidently the current state can be estimated.": "部署经验使我关注：控制器如何考虑观测了什么、何时观测，以及当前状态估计的置信程度。",
+    "Research interests and possible methods": "研究兴趣与可能方法",
+    "Timing-aware state estimation": "时序感知状态估计",
+    "How can timestamps, action history, jitter, and missed cycles inform a current-state estimate?": "时间戳、动作历史、抖动与漏周期如何帮助估计当前状态？",
+    "Failure-adaptive control": "故障自适应控制",
+    "When should uncertainty change an RL or MPC controller's action, speed, or risk level?": "不确定性何时应改变 RL 或 MPC 控制器的动作、速度或风险水平？",
+    "Hybrid locomotion on hardware": "真机混合运动",
+    "How do contact changes, wheel motion, and real transport delays interact in a complete loop?": "接触变化、车轮运动和真实传输延迟如何在完整闭环中相互作用？",
+
+    "Core project 01 · real-robot locomotion": "核心项目 01 · 真机运动控制",
+    "A PPO locomotion policy was deployed through a multi-rate stack spanning ONNX inference, Linux shared memory, two STM32F407 controllers, four CAN buses, and 16 actuators.": "一个 PPO 运动策略通过多速率控制栈部署，涵盖 ONNX 推理、Linux 共享内存、两个 STM32F407 控制器、四条 CAN 总线和 16 个执行器。",
+    "Period": "周期",
+    "May-August 2026": "2026 年 5–8 月",
+    "Platform": "平台",
+    "25 kg · 16 actuators": "25 kg · 16 个执行器",
+    "Policy": "策略",
+    "57-D observation → 16-D action · 50 Hz": "57 维观测 → 16 维动作 · 50 Hz",
+    "Evidence": "证据",
+    "Hardware standing, locomotion, stairs, and disturbance recovery": "硬件站立、运动、爬楼梯与扰动恢复",
+    "My Role": "我的职责",
+    "Control stack, policy deployment, and Sim2Real diagnosis.": "控制栈、策略部署与仿真到现实诊断。",
+    "RL workflow": "强化学习流程",
+    "PPO task configuration, dynamics randomization, ONNX export, and deployment-side tensor alignment.": "PPO 任务配置、动力学随机化、ONNX 导出与部署侧张量对齐。",
+    "System integration": "系统集成",
+    "C++ state machine, shared-memory handoff, Python WDP4 bridge, dual-MCU coordination, and CAN actuator control.": "C++ 状态机、共享内存交接、Python WDP4 桥接、双 MCU 协调与 CAN 执行器控制。",
+    "Diagnosis": "诊断",
+    "Investigated disturbance-induced oscillation through deployment checks, policy retraining, and retained hardware tests.": "通过部署检查、策略再训练和留存硬件测试研究扰动引起的振荡。",
+    "The video and images below are qualitative hardware records; no aggregate success rate is claimed.": "下方视频和图片为定性硬件记录；未声称汇总成功率。",
+    "System architecture": "系统架构",
+    "Closed-loop, multi-rate control path.": "闭环、多速率控制路径。",
+    "Policy updates are held between lower-level refreshes. The bridge only releases a fused observation when feedback from both MCUs belongs to the same accepted epoch.": "策略更新在底层刷新之间保持。只有当两个 MCU 的反馈属于同一已接受 epoch 时，桥接层才输出融合观测。",
+    "Wheel-legged robot multi-rate closed-loop architecture": "轮足机器人多速率闭环架构",
+    "A 50 Hz ONNX policy communicates through a 200 Hz Linux and shared-memory bridge, WDP4 over USB, two 1 kHz microcontrollers, four 500 Hz CAN buses, and 16 actuators. Feedback returns through freshness, epoch, and watchdog checks.": "50 Hz ONNX 策略经由 200 Hz Linux 与共享内存桥、基于 USB 的 WDP4、两个 1 kHz 微控制器、四条 500 Hz CAN 总线连接 16 个执行器。反馈通过新鲜度、epoch 和看门狗检查返回。",
+    "Command path": "命令路径",
+    "policy semantics and transport refresh are intentionally separated": "策略语义与传输刷新被有意分离",
+    "Feedback path and safety gates": "反馈路径与安全门控",
+    "an observation is released only after cross-device consistency and freshness checks": "仅在跨设备一致性和新鲜度检查后输出观测",
+    "ONNX policy + state machine": "ONNX 策略 + 状态机",
+    "Linux bridge": "Linux 桥接层",
+    "shared memory + dual-device": "共享内存 + 双设备",
+    "coordination": "协调",
+    "Dual STM32F407 MCUs": "双 STM32F407 MCU",
+    "local command, feedback, safety": "本地命令、反馈与安全",
+    "Four CAN buses": "四条 CAN 总线",
+    "4 motors per bus": "每条总线 4 个电机",
+    "16 actuators": "16 个执行器",
+    "12 joints +": "12 个关节 +",
+    "4 wheels": "4 个车轮",
+    "WDP4 / USB": "WDP4 / USB",
+    "commands": "命令",
+    "MCU local safety": "MCU 本地安全",
+    "fast feedback qualification": "快速反馈判定",
+    "stale motor feedback → zero command": "陈旧电机反馈 → 零命令",
+    "Epoch and freshness checks": "Epoch 与新鲜度检查",
+    "same observation_seq · age ≤ 10 ms": "相同 observation_seq · 时效 ≤ 10 ms",
+    "USB arrival skew ≤ 30 ms": "USB 到达偏差 ≤ 30 ms",
+    "no qualified common state → stop": "无合格公共状态 → 停止",
+    "57-D policy observation": "57 维策略观测",
+    "IMU · joint q/dq · command · last action": "IMU · 关节 q/dq · 命令 · 上一动作",
+    "accepted feedback closes the loop": "已接受反馈闭合回路",
+    "motor feedback": "电机反馈",
+    "accepted epoch": "已接受 epoch",
+    "MCU feedback + diagnostics": "MCU 反馈 + 诊断",
+    "paired feedback history": "配对反馈历史",
+    "Documented architecture: 50 Hz policy inference, 200 Hz bridge refresh, 1 kHz MCU service, and 500 Hz CAN command/feedback scheduling. Thresholds shown are current archived checks, not general hardware limits.": "已记录架构：50 Hz 策略推理、200 Hz 桥接刷新、1 kHz MCU 服务与 500 Hz CAN 命令/反馈调度。所示阈值为当前归档检查，并非一般硬件极限。",
+    "Sim2Real and debugging": "仿真到现实与调试",
+    "From a visible failure mode to an instrumented loop.": "从可见故障现象到可观测闭环。",
+    "An early hardware policy could stand and move, but a kick produced growing oscillation. I treated this as a diagnosis problem rather than as evidence for or against PPO.": "早期硬件策略能够站立和运动，但受踢后振荡不断增大。我将其视为诊断问题，而非 PPO 是否有效的证据。",
+    "Broadened the training envelope": "扩大训练覆盖范围",
+    "The retained configuration randomizes mass, center of mass, friction, gains, reset state, pushes, and action/proprioceptive latency.": "留存配置随机化了质量、质心、摩擦、增益、重置状态、推力和动作/本体感觉延迟。",
+    "Kept interfaces explicit": "保持接口显式",
+    "The deployment state machine constructs the same 57-D observation ordering used by the exported policy.": "部署状态机构建与导出策略相同排序的 57 维观测。",
+    "Made stale state actionable": "使陈旧状态可被处理",
+    "Epoch matching, sample age, USB skew, and watchdog behavior prevent mixed-device feedback from being treated as current state.": "Epoch 匹配、样本时效、USB 偏差和看门狗行为避免将混合设备反馈视作当前状态。",
+    "Hardware record": "硬件记录",
+    "Robot, outdoor test, and disturbance recovery.": "机器人、户外测试与扰动恢复。",
+    "Still images make the platform and test setting visible; the representative video remains available for reviewing behavior.": "静态图片展示平台与测试环境；代表性视频可用于查看运动行为。",
+    "Wheel-legged platform.": "轮足平台。",
+    "Outdoor hardware setup with exposed electronics and wheel-leg mechanism.": "带有外露电子部件和轮足机构的户外硬件测试设置。",
+    "Outdoor locomotion.": "户外运动。",
+    "A retained frame from a field test on paved terrain.": "铺装地面现场测试的留存画面。",
+    "Disturbance test.": "扰动测试。",
+    "Retained hardware video after revised randomization and deployment iteration.": "调整随机化与部署迭代后的留存硬件视频。",
+    "What I learned": "我的收获",
+    "Communication semantics are part of control.": "通信语义是控制的一部分。",
+    "This project made the difference between a packet arriving and a usable robot observation concrete. It motivates my interest in state estimation and control policies that represent sensing age, action delay, and confidence explicitly.": "这个项目让我切实理解了“数据包到达”与“可用机器人观测”之间的差别，也促使我关注显式表示感知时效、动作延迟和置信度的状态估计与控制策略。",
+
+    "Core project 02 · EtherCAT torque control": "核心项目 02 · EtherCAT 力矩控制",
+    "55 kg quadruped": "55 kg 四足机器人",
+    "I worked on the software and control path from a PPO locomotion policy to 12 EtherCAT drives in CiA-402 Profile Torque mode, with joint-level recordings used to investigate deployment mismatch.": "我参与了从 PPO 运动策略到 12 个 CiA-402 Profile Torque 模式 EtherCAT 驱动器的软件与控制链路，并使用关节级记录研究部署失配。",
+    "September 2025-June 2026": "2025 年 9 月–2026 年 6 月",
+    "55 kg · 12 actuators": "55 kg · 12 个执行器",
+    "45-D observation → 12-D action · implemented at 50 Hz": "45 维观测 → 12 维动作 · 已实现 50 Hz",
+    "Retained walking, PACE data collection, and joint tracking records": "留存的行走、PACE 数据采集与关节跟踪记录",
+    "Deployment software, real-time control integration, and mismatch diagnosis.": "部署软件、实时控制集成与失配诊断。",
+    "Policy path": "策略路径",
+    "ONNX runner, 45-D observation construction, action mapping, and state-machine integration.": "ONNX 运行器、45 维观测构建、动作映射与状态机集成。",
+    "Low-level path": "底层路径",
+    "Joint target handoff, 1 kHz PD computation, SOEM EtherCAT exchange, and CiA-402 drive-state handling.": "关节目标交接、1 kHz PD 计算、SOEM EtherCAT 交换与 CiA-402 驱动状态处理。",
+    "Desired-versus-measured joint recording, model/interface checks, and iteration around delay, friction, and actuation behavior.": "期望—实测关节记录、模型/接口检查，以及围绕延迟、摩擦和执行器行为的迭代。",
+    "The archived project contains several model/configuration versions. This page shows the hardware path and records, not an unverified aggregate performance metric.": "归档项目包含多个模型/配置版本。本页展示硬件路径和记录，而非未经验证的汇总性能指标。",
+    "Control architecture": "控制架构",
+    "Policy, PD, fieldbus, and robot form one feedback loop.": "策略、PD、现场总线与机器人构成一条反馈回路。",
+    "The learned policy supplies joint targets; lower layers recompute torque from current feedback and refresh the EtherCAT PDO path at a faster rate.": "学习策略提供关节目标；底层根据当前反馈重新计算力矩，并以更高频率刷新 EtherCAT PDO 路径。",
+    "Quadruped PPO and EtherCAT control architecture": "四足 PPO 与 EtherCAT 控制架构",
+    "A 45-dimensional observation enters a PPO policy, producing joint targets. A one kilohertz PD controller sends torque targets through a two kilohertz SOEM EtherCAT master to 12 CiA-402 torque drives and the quadruped. Joint feedback returns to the PD and observation path. Dashed annotations show possible mismatch and timing effects.": "45 维观测进入 PPO 策略并产生关节目标。1 kHz PD 控制器经由 2 kHz SOEM EtherCAT 主站将力矩目标发送到 12 个 CiA-402 力矩驱动器和四足机器人。关节反馈返回 PD 与观测路径。虚线注释表示可能的失配和时序影响。",
+    "policy targets are held while PD and fieldbus loops continue at their own rates": "策略目标保持，而 PD 和现场总线环路继续以各自频率运行",
+    "joint state, IMU information, and timing are not assumed to be perfectly synchronous": "不假定关节状态、IMU 信息与时序完全同步",
+    "45-D observation": "45 维观测",
+    "ω, gravity, command": "角速度、重力向量、命令",
+    "q, dq, last action": "q、dq、上一动作",
+    "PPO / ONNX policy": "PPO / ONNX 策略",
+    "45 → 12 action": "45 → 12 动作",
+    "implemented at 50 Hz": "已实现 50 Hz",
+    "Joint targets": "关节目标",
+    "PD control": "PD 控制",
+    "SOEM / EtherCAT": "SOEM / EtherCAT",
+    "PDO exchange + state": "PDO 交换 + 状态",
+    "management": "管理",
+    "CiA-402": "CiA-402",
+    "drives": "驱动器",
+    "12 targets": "12 个目标",
+    "torque PDO": "力矩 PDO",
+    "Quadruped + sensors": "四足机器人 + 传感器",
+    "encoder q, dq, torque, IMU": "编码器 q、dq、力矩、IMU",
+    "physical feedback": "物理反馈",
+    "State / observation update": "状态 / 观测更新",
+    "coordinate mapping + scaling": "坐标映射 + 缩放",
+    "policy input at next step": "下一步策略输入",
+    "q, dq for PD": "用于 PD 的 q、dq",
+    "joint + IMU feedback": "关节 + IMU 反馈",
+    "Possible timing effects": "可能的时序影响",
+    "observation/action delay": "观测/动作延迟",
+    "jitter · missed updates": "抖动 · 漏更新",
+    "Possible plant mismatch": "可能的被控对象失配",
+    "actuator delay · static friction": "执行器延迟 · 静摩擦",
+    "model mismatch": "模型失配",
+    "Source-supported path: 45-D observation → PPO policy → joint targets → 1 kHz PD → 2 kHz SOEM/EtherCAT → 12 Profile-Torque drives → robot. Dashed labels denote likely sources of deployment mismatch, not separately measured contributions.": "材料支持的路径：45 维观测 → PPO 策略 → 关节目标 → 1 kHz PD → 2 kHz SOEM/EtherCAT → 12 个 Profile-Torque 驱动器 → 机器人。虚线标签表示可能的部署失配来源，并非单独测得的贡献。",
+    "Diagnostic loop": "诊断回路",
+    "Joint traces turned an ambiguous behavior into a tractable signal path.": "关节轨迹将模糊的行为转化为可分析的信号路径。",
+    "I used desired and measured joint motion to inspect tracking shape, offsets, and axis-specific behavior before revising model/interface assumptions and returning to hardware tests.": "我使用期望与实测关节运动检查跟踪形状、偏置和各轴行为，再修订模型/接口假设并回到硬件测试。",
+    "Observe": "观测",
+    "PACE-based collection retained commanded and measured joint trajectories instead of relying only on body-level behavior.": "基于 PACE 的采集保留了命令与实测关节轨迹，而非只依赖机身级行为。",
+    "Localize": "定位",
+    "Checks covered coordinate mappings, default pose and action scale, static friction, actuator response, and PD behavior.": "检查涵盖坐标映射、默认姿态与动作尺度、静摩擦、执行器响应和 PD 行为。",
+    "Iterate": "迭代",
+    "Model/interface changes and dynamics compensation were assessed through the same measured control path.": "通过相同的测量控制路径评估模型/接口变更和动力学补偿。",
+    "Platform, test setup, and joint tracking.": "平台、测试设置与关节跟踪。",
+    "The images show the physical platform and bench context. The curve is a retained command-versus-measurement diagnostic, not a summarized tracking score.": "图片展示物理平台和台架环境。曲线是留存的命令—测量诊断，而非汇总跟踪得分。",
+    "55 kg quadruped.": "55 kg 四足机器人。",
+    "Hardware platform used for the EtherCAT deployment work.": "用于 EtherCAT 部署工作的硬件平台。",
+    "Bench setup.": "台架设置。",
+    "A retained image from controlled work around the platform.": "平台受控测试的留存图片。",
+    "Desired versus measured joints.": "期望与实测关节。",
+    "Retained PACE chirp visualization for the front-left leg.": "左前腿留存的 PACE 啁啾可视化。",
+    "PACE data collection.": "PACE 数据采集。",
+    "Representative video associated with joint-level diagnosis.": "与关节级诊断相关的代表性视频。",
+    "Sim2Real is a systems diagnosis problem.": "仿真到现实是一个系统诊断问题。",
+    "This work strengthened my interest in controllers that can distinguish model, actuation, sensing, and timing effects rather than absorb all of them as a single unexplained deployment error.": "这项工作强化了我对控制器的兴趣：它们应区分模型、执行、感知和时序影响，而非将其全部归为一种无法解释的部署误差。",
+
+    "Proposed research direction · no results claimed": "拟议研究方向 · 尚无结果声明",
+    "Timing-aware state estimation and uncertainty-aware locomotion control.": "时序感知状态估计与不确定性感知运动控制。",
+    "My deployment experience has made me interested in how RL or MPC controllers should respond when observations, actions, and low-level updates do not arrive on the nominal schedule.": "部署经验使我关注：当观测、动作和底层更新未按标称时序到达时，RL 或 MPC 控制器应如何响应。",
+    "Question": "问题",
+    "What should a controller believe is happening now?": "控制器应如何判断“此刻”正在发生什么？",
+    "I am interested in systems where sensor data, issued actions, and physical actuation refer to slightly different moments. One possible direction is to estimate a short-horizon current-state distribution from timestamped history, then give an RL or MPC controller both the estimate and a calibrated confidence signal. I would like to investigate whether this can improve graceful degradation as delay, jitter, or missed cycles grow.": "我对这样的系统感兴趣：传感器数据、已发出动作和物理执行对应略有不同的时刻。一个可能方向是从带时间戳的历史中估计短时域当前状态分布，再向 RL 或 MPC 控制器同时提供估计和经校准的置信度信号。我希望研究随着延迟、抖动或漏周期增加，这是否能改善渐进降级。",
+    "Timing conditions": "时序条件",
+    "Four ways a nominal loop can become a different loop.": "标称闭环变成不同闭环的四种方式。",
+    "Observation delay": "观测延迟",
+    "The controller acts on a state whose contact or body motion may already have changed.": "控制器作用于接触或机身运动可能已经变化的状态。",
+    "Action delay": "动作延迟",
+    "A command reaches the plant later than the policy or optimizer assumes.": "命令到达被控对象的时间晚于策略或优化器的假设。",
+    "Jitter": "抖动",
+    "Variable compute or transport timing makes a single fixed-delay model incomplete.": "可变计算或传输时序使单一固定延迟模型并不完整。",
+    "Missed cycles": "漏周期",
+    "Held or skipped updates alter the effective action history.": "保持或跳过的更新会改变有效动作历史。",
+    "Possible method": "可能的方法",
+    "Estimate, calibrate, then adapt the controller's response.": "先估计、再校准，然后调整控制器响应。",
+    "This diagram describes a research direction I hope to explore under doctoral supervision. Interfaces and evaluation criteria would need to be established on instrumented simulation and hardware loops.": "该图描述了我希望在博士导师指导下探索的研究方向。接口和评价标准仍需在可观测的仿真与硬件闭环上建立。",
+    "Proposed timing-aware state estimation and control method": "拟议的时序感知状态估计与控制方法",
+    "Timestamped recent states, actions, and timing metadata enter a short-horizon state predictor. The predictor produces a predicted state distribution and confidence which together enter an RL or MPC controller. The controller commands the robot and records the resulting observations. Observation delay, action delay, jitter and missed cycles are distinguished at relevant interfaces.": "带时间戳的近期状态、动作和时序元数据进入短时域状态预测器。预测器生成预测状态分布与置信度，并共同输入 RL 或 MPC 控制器。控制器向机器人发出命令并记录由此产生的观测。在相关接口处区分观测延迟、动作延迟、抖动和漏周期。",
+    "Proposed state-estimation and control path": "拟议的状态估计与控制路径",
+    "timestamps and timing metadata are treated as inputs rather than hidden disturbances": "将时间戳和时序元数据视为输入而非隐藏扰动",
+    "Instrumented feedback and timing events": "可观测反馈与时序事件",
+    "Timestamped history": "带时间戳的历史",
+    "recent state estimates": "近期状态估计",
+    "recent actions / issued commands": "近期动作 / 已发出命令",
+    "observation timestamps": "观测时间戳",
+    "Timing metadata": "时序元数据",
+    "age · cycle duration · jitter": "时效 · 周期时长 · 抖动",
+    "missed-update indicators": "漏更新指示量",
+    "action issue timestamps": "动作发出时间戳",
+    "Short-horizon state predictor": "短时域状态预测器",
+    "estimate effective current or": "估计有效当前或",
+    "near-future state from history": "近未来状态（由历史推断）",
+    "candidate learned / structured model": "候选学习型 / 结构化模型",
+    "State distribution": "状态分布",
+    "predicted state + confidence": "预测状态 + 置信度",
+    "calibration evaluated separately": "单独评估校准性",
+    "control": "控制",
+    "aligned history": "对齐历史",
+    "belief + confidence": "状态信念 + 置信度",
+    "Robot and low-level loop": "机器人与底层闭环",
+    "physical state and applied action": "物理状态与已施加动作",
+    "control action": "控制动作",
+    "Observed timing events": "观测到的时序事件",
+    "observation delay · action delay": "观测延迟 · 动作延迟",
+    "jitter · missed cycles": "抖动 · 漏周期",
+    "recorded alongside state/action history": "随状态/动作历史一同记录",
+    "Recorded states and action outcomes": "记录的状态与动作结果",
+    "joint / body feedback, commands, event timestamps": "关节 / 机身反馈、命令、事件时间戳",
+    "timing metadata": "时序元数据",
+    "state/action record": "状态/动作记录",
+    "applied-action timing": "已施加动作的时序",
+    "Possible method: timestamped state/action history and timing metadata feed a short-horizon predictor; predicted state and confidence then inform an RL or MPC controller. The dashed path distinguishes command issue time from action application time.": "可能方法：带时间戳的状态/动作历史与时序元数据输入短时域预测器；预测状态和置信度再用于 RL 或 MPC 控制器。虚线路径区分命令发出时间与动作施加时间。",
+    "Evaluation ideas": "评价思路",
+    "Measure both control outcomes and the quality of uncertainty.": "同时衡量控制结果与不确定性质量。",
+    "I would begin with controlled timing faults in simulation and then move to an instrumented wheel-legged or quadruped platform when the setup is ready.": "我会先在仿真中引入受控时序故障，再在条件具备时转向可观测的轮足或四足平台。",
+    "Perturbations": "扰动",
+    "Observation delay, action delay, variable jitter, bursty missed cycles, and combinations with friction or actuator mismatch.": "观测延迟、动作延迟、可变抖动、突发漏周期，以及与摩擦或执行器失配的组合。",
+    "Baselines": "基线",
+    "Domain-randomized PPO, recurrent policy, deterministic state predictor, fixed-delay compensation, and a controller without confidence input.": "域随机化 PPO、循环策略、确定性状态预测器、固定延迟补偿，以及不含置信度输入的控制器。",
+    "Control outcomes": "控制结果",
+    "Task completion or fall, recovery time, tracking error, intervention threshold, and degradation as timing faults increase.": "任务完成或跌倒、恢复时间、跟踪误差、干预阈值，以及随时序故障增加的降级情况。",
+    "Estimation outcomes": "估计结果",
+    "Prediction error, interval coverage, calibration error, out-of-distribution detection, and added compute latency.": "预测误差、区间覆盖率、校准误差、分布外检测与新增计算延迟。",
+    "Ablations": "消融实验",
+    "Remove timestamps, action history, missed-cycle indicators, or confidence-conditioned control to test which inputs matter.": "移除时间戳、动作历史、漏周期指示量或置信度条件控制，以测试哪些输入重要。",
+    "ORL fit": "与 ORL 的契合",
+    "Directions I hope to explore with Christian Hubicki's Optimal Robotics Laboratory.": "我希望在 Christian Hubicki 的 Optimal Robotics Laboratory 探索的方向。",
+    "I see this as an opportunity to connect my deployment experience with research on adaptation, optimization, failure, and hybrid locomotion.": "我将其视为把部署经验与自适应、优化、失效和混合运动研究连接起来的机会。",
+    "I am interested in whether timing uncertainty can be a useful signal for controllers that adapt as physical failure becomes more likely.": "我希望研究：当物理失效更可能发生时，时序不确定性是否能成为控制器自适应的有效信号。",
+    "PaReMPC and adaptation": "PaReMPC 与自适应",
+    "I hope to explore how fast, physically structured adaptation could use a timing-aware state estimate without violating real-time constraints.": "我希望探索快速、具有物理结构的自适应如何使用时序感知状态估计，同时不违反实时约束。",
+    "Real-time optimization": "实时优化",
+    "My systems work motivates a concrete question: how should compute budget and worst-case latency enter the controller design itself?": "系统工作带来了一个具体问题：计算预算和最坏情况延迟应如何进入控制器本身的设计？",
+    "Hybrid locomotion": "混合运动",
+    "Wheel-legged motion combines contact transitions, continuous rolling, and changing traction, which may be a useful setting for timing-aware control studies.": "轮足运动结合了接触转换、连续滚动与不断变化的牵引力，可能是研究时序感知控制的有用场景。",
+    "Relevant Preparation": "相关准备",
+    "Experience that gives this question an experimental starting point.": "为这个问题提供实验起点的经验。",
+    "Multi-rate loops": "多速率闭环",
+    "50 Hz learned policies over 500 Hz CAN, 1 kHz PD, and 2 kHz EtherCAT lower-level paths.": "50 Hz 学习策略运行在 500 Hz CAN、1 kHz PD 和 2 kHz EtherCAT 底层路径之上。",
+    "Traceable interfaces": "可追溯接口",
+    "Shared memory, dual-MCU epoch checks, desired/measured logs, and explicit observation/action contracts.": "共享内存、双 MCU epoch 检查、期望/实测日志和显式观测/动作约定。",
+    "Real deployment issues": "真实部署问题",
+    "Physical disturbances, delayed response, static friction, model error, and configuration drift across simulation and hardware.": "物理扰动、延迟响应、静摩擦、模型误差以及仿真与硬件之间的配置漂移。",
+    "Wheel-leg project": "轮足项目",
+    "Quadruped project": "四足项目",
+
+    "Supporting work · integration and field deployment": "支持性工作 · 集成与现场部署",
+    "Systems work around the controller.": "围绕控制器的系统工作。",
+    "These projects broaden the deployment context: migrating a 20-motor control system to Ubuntu, ROS 2, and EtherCAT, and participating in field work on a magnetic climbing inspection robot.": "这些项目拓展了部署背景：将 20 电机控制系统迁移至 Ubuntu、ROS 2 和 EtherCAT，以及参与磁吸爬壁巡检机器人的现场工作。",
+    "20 motor · Ubuntu · ROS 2 · EtherCAT": "20 电机 · Ubuntu · ROS 2 · EtherCAT",
+    "Field work": "现场工作",
+    "Magnetic climbing robot · visual inspection": "磁吸爬壁机器人 · 视觉巡检",
+    "Connection": "关联",
+    "Hardware/software interfaces and deployment conditions": "软硬件接口与部署条件",
+    "Systems project": "系统项目",
+    "20-motor control migration and integration.": "20 电机控制迁移与集成。",
+    "I migrated a Windows-oriented 20-motor control workflow toward Ubuntu and ROS 2, adapting EtherCAT communication and integrating a control card without native Linux support. The work connected data collection and control-command paths to the ROS 2 system.": "我将面向 Windows 的 20 电机控制流程迁移至 Ubuntu 和 ROS 2，适配 EtherCAT 通信并集成不具备原生 Linux 支持的控制卡。工作将数据采集和控制命令路径连接到 ROS 2 系统。",
+    "The retained package includes project media and integration assets. It does not support a public latency claim, so no timing number is reported here.": "留存材料包含项目媒体和集成资产，但不支持公开的延迟声明，因此此处不报告时序数值。",
+    "Integrated system.": "集成系统。",
+    "Retained project diagram of the multi-motor platform.": "多电机平台的留存项目图。",
+    "Hardware motion.": "硬件运动。",
+    "Representative record of the integrated system.": "集成系统的代表性记录。",
+    "Migration architecture": "迁移架构",
+    "Application and fieldbus responsibilities made explicit.": "明确应用层与现场总线的职责。",
+    "The figure records the system boundaries described in the available CV and materials. It does not infer an undocumented servo rate or driver implementation.": "该图记录可用简历和材料所描述的系统边界；不推断未经记录的伺服频率或驱动实现。",
+    "20 motor Ubuntu ROS 2 EtherCAT migration architecture": "20 电机 Ubuntu ROS 2 EtherCAT 迁移架构",
+    "A Linux Ubuntu and ROS 2 application connects through an adapted control-card interface to an EtherCAT master, then to 20 EtherCAT motor drives and the upper-limb mechanism. State and diagnostics return along the same fieldbus path.": "Linux Ubuntu 与 ROS 2 应用通过适配后的控制卡接口连接 EtherCAT 主站，再连接 20 个 EtherCAT 电机驱动器和上肢机构。状态和诊断沿同一现场总线路径返回。",
+    "Command path after migration": "迁移后的命令路径",
+    "the Linux-facing interface and EtherCAT responsibilities are separated": "面向 Linux 的接口与 EtherCAT 职责被分离",
+    "State and diagnostic return": "状态与诊断返回",
+    "Ubuntu + ROS 2 application": "Ubuntu + ROS 2 应用",
+    "control commands · data collection": "控制命令 · 数据采集",
+    "Control-card driver adaptation": "控制卡驱动适配",
+    "Linux-facing interface for a card": "面向 Linux 的控制卡接口",
+    "without native Linux support": "（该卡无原生 Linux 支持）",
+    "EtherCAT master": "EtherCAT 主站",
+    "master/slave communication": "主从通信",
+    "20 EtherCAT motor drives": "20 个 EtherCAT 电机驱动器",
+    "periodic communication": "周期通信",
+    "and control interfaces": "与控制接口",
+    "ROS 2 interfaces": "ROS 2 接口",
+    "EtherCAT PDO": "EtherCAT PDO",
+    "Upper-limb / exoskeleton mechanism": "上肢 / 外骨骼机构",
+    "motor and system state": "电机与系统状态",
+    "motor state + diagnostics": "电机状态 + 诊断",
+    "ROS 2 data path": "ROS 2 数据路径",
+    "Editable summary of the documented migration: Ubuntu/ROS 2 application → control-card adaptation → EtherCAT master → 20 motor drives → mechanism, with feedback and diagnostics returned to the application layer.": "已记录迁移的可编辑摘要：Ubuntu/ROS 2 应用 → 控制卡适配 → EtherCAT 主站 → 20 个电机驱动器 → 机构，并将反馈与诊断返回应用层。",
+    "Field robotics": "现场机器人",
+    "Magnetic wall-climbing inspection robot.": "磁吸爬壁巡检机器人。",
+    "I contributed to a visual inspection workflow and field deployment at the Wudongde Hydropower Station. Dust, vibration, illumination variation, viewpoint change, and access constraints made the physical setting an important part of the work.": "我参与了乌东德水电站的视觉巡检流程与现场部署。粉尘、振动、光照变化、视角变化和可达性限制使物理环境成为工作的重要部分。",
+    "The available archive contains individual model runs and field media; it does not establish a public end-to-end accuracy result for the combined system.": "可用归档包含单个模型运行记录和现场媒体，但不足以证明组合系统的公开端到端精度结果。",
+    "Field setting.": "现场环境。",
+    "Magnetic inspection robot at the hydropower deployment site.": "水电站部署现场的磁吸巡检机器人。",
+    "Mechanical transition.": "机械过渡。",
+    "Retained record of an inverted right-angle transition.": "倒置直角过渡的留存记录。",
+    "Research relevance": "研究关联",
+    "Control laws depend on the systems that carry them.": "控制律依赖于承载它们的系统。",
+    "These projects reinforced a practical lesson from the locomotion work: operating systems, fieldbuses, sensing, mechanics, and site conditions all shape what a controller can observe and execute.": "这些项目强化了运动控制工作中的一个实践经验：操作系统、现场总线、感知、机械结构和现场条件都会塑造控制器能观测和执行的内容。",
+
+    "Additional work · scientific machine learning": "补充工作 · 科学机器学习",
+    "Additional Work": "补充工作",
+    "Two supporting projects in physics-informed learning and materials modeling. They inform how I approach structured models, small datasets, and validation, while the core of this portfolio remains real-robot control.": "两个支持性项目涉及物理信息学习和材料建模。它们影响了我处理结构化模型、小数据集和验证的方式，而本作品集的核心仍是真机控制。",
+    "Time-varying furnace temperature prediction": "时变炉温预测",
+    "Alloys": "合金",
+    "Augmentation and regression workflow": "数据增强与回归流程",
+    "Authorship": "作者身份",
+    "Second author, according to the current CV": "根据当前简历，为第二作者",
+    "Contribution scope is limited to the retained code, materials, and current CV; this page does not claim unverified optimization or experimental results.": "贡献范围限于留存代码、材料和当前简历；本页不声称未经验证的优化或实验结果。",
+    "Physics-informed learning": "物理信息学习",
+    "Time-varying PINN for furnace heating": "用于加热炉的时变 PINN",
+    "I extended a static-snapshot workflow to model a full heating cycle and nonuniform heat-source conditions. The implementation combines a 2D finite-difference reference path with PDE, initial-condition, boundary-condition, and reference losses.": "我将静态快照流程扩展为建模完整加热周期和非均匀热源条件。实现结合二维有限差分参考路径，以及 PDE、初始条件、边界条件和参考损失。",
+    "2D heat equation": "二维热方程",
+    "Time-varying": "时变",
+    "Data-driven materials": "数据驱动材料",
+    "Magnesium alloy property modeling": "镁合金性能建模",
+    "For a small materials dataset, I worked on data augmentation and regression workflows using a Transformer, MLP, and stacking approach to predict yield strength, elongation, and ultimate tensile strength from composition and process variables.": "针对小型材料数据集，我参与了数据增强和回归流程，使用 Transformer、MLP 和 stacking 方法，根据成分与工艺变量预测屈服强度、延伸率和抗拉强度。",
+    "Small-data learning": "小数据学习",
+    "Manuscript-associated work": "论文关联工作",
+    "Outputs currently listed in the available materials.": "当前可用材料中列出的产出。",
+    "Full bibliographic details and public links can be added when confirmed.": "完整书目信息和公开链接可在确认后补充。",
+    "Accepted": "已接收",
+    "Second author · dynamic PINN workflow": "第二作者 · 动态 PINN 流程",
+    "Under review": "审稿中",
+    "Second author · data and model workflow": "第二作者 · 数据与模型流程"
+  };
+
+  const attributes = {
+    "Wang Gufan portfolio home": "王古帆作品集首页",
+    "Primary navigation": "主导航",
+    "Wheel-legged robot on pavement during a hardware test": "硬件测试中位于铺装地面的轮足机器人",
+    "Wheel-legged robot traveling on an outdoor path": "在户外路径上行进的轮足机器人",
+    "55 kg quadruped standing in a laboratory": "实验室中的 55 kg 四足机器人",
+    "Quadruped suspended in a laboratory bench setup": "实验室台架上悬挂的四足机器人",
+    "Desired and measured front-left quadruped joint tracking curves": "四足机器人左前腿期望与实测关节跟踪曲线",
+    "Dual upper-limb and lower-body robot system": "双上肢与下肢机器人系统",
+    "Magnetic wall-climbing inspection robot at a hydropower facility": "水电设施中的磁吸爬壁巡检机器人",
+    "Magnetic climbing robot transitioning across a right angle": "经过直角过渡的磁吸爬壁机器人"
+  };
+
+  const documentText = {
+    "Robotics Research Portfolio · Wang Gufan": "机器人研究作品集 · 王古帆",
+    "25 kg Wheel-Legged Robot · Wang Gufan": "25 kg 轮足机器人 · 王古帆",
+    "55 kg EtherCAT Quadruped · Wang Gufan": "55 kg EtherCAT 四足机器人 · 王古帆",
+    "Systems & Field Robotics · Wang Gufan": "系统工程与现场机器人 · 王古帆",
+    "Research Interests · Wang Gufan": "研究兴趣 · 王古帆",
+    "Additional Work · Wang Gufan": "补充工作 · 王古帆"
+  };
+
+  function getLanguage() {
+    try { return localStorage.getItem(storageKey) === "zh-CN" ? "zh-CN" : "en"; }
+    catch { return "en"; }
+  }
+
+  function translateTextNodes(language) {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        return parent && !parent.closest("script, style, code") && node.nodeValue.trim()
+          ? NodeFilter.FILTER_ACCEPT
+          : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((node) => {
+      if (!originalNodes.has(node)) originalNodes.set(node, node.nodeValue);
+      const original = originalNodes.get(node);
+      const key = original.trim();
+      node.nodeValue = language === "zh-CN" && zh[key] ? original.replace(key, zh[key]) : original;
+    });
+  }
+
+  function translateAttributes(language) {
+    document.querySelectorAll("[aria-label], [alt]").forEach((node) => {
+      ["aria-label", "alt"].forEach((attribute) => {
+        const dataKey = `original${attribute.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())}`;
+        const original = node.dataset[dataKey] || node.getAttribute(attribute);
+        if (!original) return;
+        node.dataset[dataKey] = original;
+        node.setAttribute(attribute, language === "zh-CN" && attributes[original] ? attributes[original] : original);
+      });
+    });
+  }
+
+  function translateDocument(language) {
+    const originalTitle = document.documentElement.dataset.originalTitle || document.title;
+    document.documentElement.dataset.originalTitle = originalTitle;
+    document.title = language === "zh-CN" && documentText[originalTitle] ? documentText[originalTitle] : originalTitle;
+  }
+
+  function render(language) {
+    document.documentElement.lang = language === "zh-CN" ? "zh-CN" : "en";
+    document.body.dataset.language = language;
+    translateTextNodes(language);
+    translateAttributes(language);
+    translateDocument(language);
+    const button = document.querySelector("[data-language-toggle]");
+    if (button) {
+      const isChinese = language === "zh-CN";
+      button.textContent = isChinese ? "EN" : "中文";
+      button.setAttribute("aria-label", isChinese ? "Switch to English" : "切换为简体中文");
+      button.setAttribute("title", isChinese ? "Switch to English" : "切换为简体中文");
+    }
+  }
+
+  const button = document.querySelector("[data-language-toggle]");
+  if (button) {
+    button.addEventListener("click", () => {
+      const language = getLanguage() === "zh-CN" ? "en" : "zh-CN";
+      try { localStorage.setItem(storageKey, language); } catch { /* Page-level fallback only. */ }
+      render(language);
+    });
+  }
+
+  render(getLanguage());
+})();

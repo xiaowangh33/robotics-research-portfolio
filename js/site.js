@@ -17,13 +17,14 @@
           <span class="brand-mark" aria-hidden="true">WG</span>
           <span class="brand-copy"><strong>Wang Gufan</strong><small>Robotics engineering · B.Eng. candidate</small></span>
         </a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
-        </button>
         <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
           ${nav.map(([id, label, href]) => `<a href="${href}" ${id === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
           <a class="nav-cv" href="assets/downloads/Wang_Gufan_CV.pdf" download>Download CV</a>
         </nav>
+        <button class="language-toggle" type="button" data-language-toggle aria-label="切换为简体中文" title="切换为简体中文">中文</button>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span><span class="sr-only">Toggle navigation</span>
+        </button>
       </header>`;
 
     const toggle = header.querySelector(".nav-toggle");
