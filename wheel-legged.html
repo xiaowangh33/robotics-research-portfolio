@@ -12,18 +12,18 @@
   <div data-site-header></div>
 
   <main>
-    <section class="page-hero section-shell">
-      <div class="page-hero-grid">
-        <div>
+    <section class="project-hero section-shell wheel-project-hero">
+      <div class="project-hero-grid">
+        <div class="project-hero-copy">
           <p class="page-kicker">Core project 01 · real-robot locomotion</p>
           <h1>25 kg wheel-legged robot</h1>
           <p class="lede">A PPO locomotion policy was deployed through a multi-rate stack spanning ONNX inference, Linux shared memory, two STM32F407 controllers, four CAN buses, and 16 actuators.</p>
         </div>
-        <figure class="hero-media">
-          <img src="assets/images/wheel-hardware.jpg" alt="Wheel-legged robot on pavement during a hardware test">
+        <figure class="project-hero-media">
+          <img src="assets/images/wheel-hero-hd.jpg" alt="Wheel-legged robot on pavement during a hardware test">
           <figcaption><strong>Wheel-legged platform.</strong> Outdoor hardware setup with exposed electronics and wheel-leg mechanism.</figcaption>
         </figure>
-        <ul class="project-summary">
+        <ul class="project-summary project-facts">
           <li><span>Period</span><div>May-August 2026</div></li>
           <li><span>Platform</span><div>25 kg · 16 actuators</div></li>
           <li><span>Policy</span><div>57-D observation → 16-D action · 50 Hz</div></li>
@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section architecture-section">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">System architecture</p>
@@ -54,19 +54,19 @@
             <text class="svg-small" x="42" y="359">an observation is released only after cross-device consistency and freshness checks</text>
 
             <rect class="node blue" x="48" y="132" width="174" height="77" rx="3"/>
-            <text class="svg-label" x="62" y="158">ONNX policy + state machine</text>
+            <text class="svg-label" x="62" y="158">ONNX policy</text>
             <text class="svg-small" x="62" y="177">obs[1,57] → action[1,16]</text>
             <text class="svg-note" x="62" y="195">50 Hz · 20 ms action hold</text>
 
             <rect class="node blue" x="284" y="122" width="184" height="98" rx="3"/>
             <text class="svg-label" x="298" y="149">Linux bridge</text>
-            <text class="svg-small" x="298" y="167">shared memory + dual-device</text>
-            <text class="svg-small" x="298" y="181">coordination</text>
+            <text class="svg-small" x="298" y="167">shared memory</text>
+            <text class="svg-small" x="298" y="181">dual-MCU sync</text>
             <text class="svg-note" x="298" y="202">200 Hz · 5 ms refresh</text>
 
             <rect class="node dark" x="534" y="122" width="192" height="98" rx="3"/>
             <text class="svg-label" x="548" y="149">Dual STM32F407 MCUs</text>
-            <text class="svg-small" x="548" y="167">local command, feedback, safety</text>
+            <text class="svg-small" x="548" y="167">commands · feedback · safety</text>
             <text class="svg-note" x="548" y="202">1 kHz service</text>
 
             <rect class="node orange" x="790" y="122" width="130" height="98" rx="3"/>
@@ -80,7 +80,7 @@
             <text class="svg-small" x="991" y="191">4 wheels</text>
 
             <path class="edge" d="M222 170 H284"/>
-            <text class="signal" x="230" y="158">16 × [kp, qd, kd, dqd, τff]</text>
+            <text class="signal" x="236" y="158">16-D action</text>
             <path class="edge" d="M468 170 H534"/>
             <text class="signal" x="483" y="158">WDP4 / USB</text>
             <path class="edge" d="M726 170 H790"/>
@@ -120,7 +120,7 @@
       </div>
     </section>
 
-    <section class="section soft">
+    <section class="section soft role-section">
       <div class="section-shell role-grid">
         <div>
           <p class="eyebrow">My Role</p>
@@ -157,12 +157,11 @@
           <p class="eyebrow">Hardware record</p>
           <div><h2>Robot, outdoor test, and disturbance recovery.</h2><p>Still images make the platform and test setting visible; the representative video remains available for reviewing behavior.</p></div>
         </div>
-        <div class="single-media">
-          <figure><img src="assets/images/wheel-outdoor-still.jpg" alt="Wheel-legged robot traveling on an outdoor path"><figcaption><strong>Outdoor locomotion.</strong> A retained frame from a field test on paved terrain.</figcaption></figure>
-        </div>
-        <div class="single-media" style="margin-top:18px">
-          <figure>
-            <video controls muted playsinline preload="metadata" poster="assets/images/wheel-disturbance-poster.jpg"><source src="assets/video/wheel-disturbance.mp4" type="video/mp4"></video>
+        <div class="wheel-media-story">
+          <figure class="media-figure wheel-scene-primary"><img src="assets/images/wheel-red-track-hd.jpg" alt="Wheel-legged robot during an outdoor track test"><figcaption><strong>Wheel-legged platform.</strong> Hardware test on an outdoor track.</figcaption></figure>
+          <figure class="media-figure wheel-scene-secondary"><img src="assets/images/wheel-outdoor-hd.jpg" alt="Wheel-legged robot traveling on an outdoor path"><figcaption><strong>Outdoor locomotion.</strong> A retained frame from a field test on paved terrain.</figcaption></figure>
+          <figure class="media-figure portrait-video">
+            <video controls muted playsinline preload="metadata" poster="assets/images/wheel-disturbance-poster-hd.jpg"><source src="assets/video/wheel-disturbance-original.mp4" type="video/mp4"></video>
             <figcaption><strong>Disturbance test.</strong> Retained hardware video after revised randomization and deployment iteration.</figcaption>
           </figure>
         </div>

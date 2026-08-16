@@ -12,18 +12,24 @@
   <div data-site-header></div>
 
   <main>
-    <section class="page-hero section-shell">
-      <div class="page-hero-grid">
-        <div>
+    <section class="systems-hero section-shell">
+      <div class="systems-hero-grid">
+        <div class="systems-hero-copy">
           <p class="page-kicker">Supporting work · integration and field deployment</p>
           <h1>Systems work around the controller.</h1>
           <p class="lede supporting-intro">These projects broaden the deployment context: migrating a 20-motor control system to Ubuntu, ROS 2, and EtherCAT, and participating in field work on a magnetic climbing inspection robot.</p>
         </div>
-        <figure class="hero-media">
-          <img src="assets/images/climbing-field.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility">
-          <figcaption><strong>Field setting.</strong> Magnetic inspection robot at the hydropower deployment site.</figcaption>
-        </figure>
-        <ul class="project-summary">
+        <div class="systems-hero-visuals">
+          <figure class="systems-primary-figure">
+            <img src="assets/images/upper-limb-system-hd.png" alt="Dual upper-limb and lower-body robot system">
+            <figcaption><strong>Integrated system.</strong> Retained project diagram of the multi-motor platform.</figcaption>
+          </figure>
+          <figure class="systems-field-inset">
+            <img src="assets/images/climbing-field-original.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility">
+            <figcaption><strong>Field setting.</strong> Magnetic inspection robot at the hydropower deployment site.</figcaption>
+          </figure>
+        </div>
+        <ul class="project-summary systems-facts">
           <li><span>Systems</span><div>20 motor · Ubuntu · ROS 2 · EtherCAT</div></li>
           <li><span>Field work</span><div>Magnetic climbing robot · visual inspection</div></li>
           <li><span>Connection</span><div>Hardware/software interfaces and deployment conditions</div></li>
@@ -31,7 +37,7 @@
       </div>
     </section>
 
-    <section class="section soft">
+    <section class="section soft architecture-section systems-architecture">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">Migration architecture</p>
@@ -56,8 +62,8 @@
             <text class="svg-small" x="69" y="170">control commands · data collection</text>
 
             <rect class="node orange" x="335" y="116" width="200" height="80" rx="3"/>
-            <text class="svg-label" x="349" y="143">Control-card driver adaptation</text>
-            <text class="svg-small" x="349" y="161">Linux-facing interface for a card</text>
+            <text class="svg-label" x="349" y="143">Control-card adapter</text>
+            <text class="svg-small" x="349" y="161">Linux-facing interface</text>
             <text class="svg-small" x="349" y="175">without native Linux support</text>
 
             <rect class="node dark" x="621" y="125" width="158" height="62" rx="3"/>
@@ -65,9 +71,9 @@
             <text class="svg-small" x="635" y="170">master/slave communication</text>
 
             <rect class="node" x="865" y="116" width="177" height="80" rx="3"/>
-            <text class="svg-label" x="879" y="143">20 EtherCAT motor drives</text>
-            <text class="svg-small" x="879" y="161">periodic communication</text>
-            <text class="svg-small" x="879" y="175">and control interfaces</text>
+            <text class="svg-label" x="879" y="143">20 motor drives</text>
+            <text class="svg-small" x="879" y="161">EtherCAT communication</text>
+            <text class="svg-small" x="879" y="175">control interfaces</text>
 
             <path class="edge" d="M249 156 H335"/>
             <path class="edge" d="M535 156 H621"/>
@@ -77,7 +83,7 @@
             <text class="signal" x="793" y="144">EtherCAT PDO</text>
 
             <rect class="node" x="809" y="340" width="233" height="55" rx="3"/>
-            <text class="svg-label" x="823" y="365">Upper-limb / exoskeleton mechanism</text>
+            <text class="svg-label" x="823" y="365">Upper-limb mechanism</text>
             <text class="svg-small" x="823" y="382">motor and system state</text>
             <path class="edge feedback" d="M954 196 V340"/>
             <path class="edge feedback" d="M809 367 H700 V187"/>
@@ -95,9 +101,8 @@
             <p>I migrated a Windows-oriented 20-motor control workflow toward Ubuntu and ROS 2, adapting EtherCAT communication and integrating a control card without native Linux support. The work connected data collection and control-command paths to the ROS 2 system.</p>
             <p class="scope-note">The retained package includes project media and integration assets. It does not support a public latency claim, so no timing number is reported here.</p>
           </div>
-          <div class="media-grid">
-            <figure><img src="assets/images/upper-limb-system.png" alt="Dual upper-limb and lower-body robot system"><figcaption><strong>Integrated system.</strong> Retained project diagram of the multi-motor platform.</figcaption></figure>
-            <figure><video controls muted playsinline preload="metadata" poster="assets/images/upper-limb-poster.jpg"><source src="assets/video/upper-limb-demo.mp4" type="video/mp4"></video><figcaption><strong>Hardware motion.</strong> Representative record of the integrated system.</figcaption></figure>
+          <div class="system-motion-visual">
+            <figure class="media-figure portrait-video upper-limb-video"><video controls muted playsinline preload="metadata" poster="assets/images/upper-limb-motion-hd.jpg"><source src="assets/video/upper-limb-original.mp4" type="video/mp4"></video><figcaption><strong>Hardware motion.</strong> Representative record of the integrated system.</figcaption></figure>
           </div>
         </article>
       </div>
@@ -112,8 +117,9 @@
             <p>I contributed to a visual inspection workflow and field deployment at the Wudongde Hydropower Station. Dust, vibration, illumination variation, viewpoint change, and access constraints made the physical setting an important part of the work.</p>
             <p>The available archive contains individual model runs and field media; it does not establish a public end-to-end accuracy result for the combined system.</p>
           </div>
-          <div class="single-media">
-            <figure><img src="assets/images/climbing-corner-poster.jpg" alt="Magnetic climbing robot transitioning across a right angle"><figcaption><strong>Mechanical transition.</strong> Retained record of an inverted right-angle transition.</figcaption></figure>
+          <div class="field-media-stack">
+            <figure class="media-figure field-photo"><img src="assets/images/climbing-field-original.jpg" alt="Magnetic wall-climbing inspection robot at a hydropower facility"><figcaption><strong>Field setting.</strong> Magnetic inspection robot at the hydropower deployment site.</figcaption></figure>
+            <figure class="media-figure field-transition"><img src="assets/images/climbing-corner-hd.jpg" alt="Magnetic climbing robot transitioning across a right angle"><figcaption><strong>Mechanical transition.</strong> Retained record of an inverted right-angle transition.</figcaption></figure>
           </div>
         </article>
       </div>

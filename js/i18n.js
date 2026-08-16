@@ -380,7 +380,46 @@
     "Accepted": "已接收",
     "Second author · dynamic PINN workflow": "第二作者 · 动态 PINN 流程",
     "Under review": "审稿中",
-    "Second author · data and model workflow": "第二作者 · 数据与模型流程"
+    "Second author · data and model workflow": "第二作者 · 数据与模型流程",
+
+    "Real-robot platforms.": "真实机器人平台。",
+    "Wheel-legged outdoor deployment and the 55 kg EtherCAT quadruped.": "轮足机器人户外部署与 55 kg EtherCAT 四足机器人。",
+    "Hardware test on an outdoor track.": "户外跑道上的硬件测试。",
+    "PACE data collection.": "PACE 数据采集。",
+    "Hardware setup associated with joint-level diagnosis.": "与关节级诊断相关的硬件设置。",
+    "Simulation model.": "仿真模型。",
+    "Isaac Sim environment used during the deployment workflow.": "部署流程中使用的 Isaac Sim 环境。",
+    "POSSIBLE METHOD": "可能方法",
+    "recent states · recent actions": "近期状态 · 近期动作",
+    "delay · jitter · missed cycles": "延迟 · 抖动 · 漏周期",
+    "candidate method": "候选方法",
+    "estimate + confidence": "估计 + 置信度",
+    "RL / MPC controller": "RL / MPC 控制器",
+    "confidence-aware action": "置信度感知动作",
+    "instrumented feedback": "可观测反馈",
+    "states + event timing": "状态 + 事件时序",
+    "Simplified timing-aware state estimation and control method": "简化的时序感知状态估计与控制方法",
+    "Timestamped history and timing metadata enter a short-horizon predictor. State distribution and confidence inform an RL or MPC controller connected to the robot.": "带时间戳的历史与时序元数据进入短时域预测器；状态分布和置信度用于连接机器人的 RL 或 MPC 控制器。",
+    "Time-varying PINN.": "时变 PINN。",
+    "Retained temperature-field visualization from the furnace-heating workflow.": "加热炉流程中留存的温度场可视化。",
+    "ONNX policy": "ONNX 策略",
+    "shared memory": "共享内存",
+    "dual-MCU sync": "双 MCU 同步",
+    "commands · feedback · safety": "命令 · 反馈 · 安全",
+    "16-D action": "16 维动作",
+    "Observation update": "观测更新",
+    "Control-card adapter": "控制卡适配层",
+    "Linux-facing interface": "面向 Linux 的接口",
+    "20 motor drives": "20 个电机驱动器",
+    "EtherCAT communication": "EtherCAT 通信",
+    "control interfaces": "控制接口",
+    "Upper-limb mechanism": "上肢机构",
+    "recent actions / commands": "近期动作 / 命令",
+    "State predictor": "状态预测器",
+    "evaluate calibration": "评价校准性",
+    "logged with state/action history": "随状态 / 动作历史记录",
+    "Recorded state / action": "记录的状态 / 动作",
+    "feedback · commands · event time": "反馈 · 命令 · 事件时间"
   };
 
   const attributes = {
@@ -393,7 +432,14 @@
     "Desired and measured front-left quadruped joint tracking curves": "四足机器人左前腿期望与实测关节跟踪曲线",
     "Dual upper-limb and lower-body robot system": "双上肢与下肢机器人系统",
     "Magnetic wall-climbing inspection robot at a hydropower facility": "水电设施中的磁吸爬壁巡检机器人",
-    "Magnetic climbing robot transitioning across a right angle": "经过直角过渡的磁吸爬壁机器人"
+    "Magnetic climbing robot transitioning across a right angle": "经过直角过渡的磁吸爬壁机器人",
+    "25 kg wheel-legged robot during an outdoor hardware test": "户外硬件测试中的 25 kg 轮足机器人",
+    "55 kg quadruped robot in a laboratory test setup": "实验室测试设置中的 55 kg 四足机器人",
+    "Wheel-legged robot during an outdoor track test": "户外跑道测试中的轮足机器人",
+    "Quadruped in a laboratory data collection setup": "实验室数据采集设置中的四足机器人",
+    "Quadruped model in Isaac Sim": "Isaac Sim 中的四足机器人模型",
+    "Simplified timing-aware state estimation method": "简化的时序感知状态估计方法",
+    "Temperature field from a physics-informed neural network project": "物理信息神经网络项目的温度场"
   };
 
   const documentText = {

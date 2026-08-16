@@ -12,18 +12,18 @@
   <div data-site-header></div>
 
   <main>
-    <section class="page-hero section-shell">
-      <div class="page-hero-grid">
-        <div>
+    <section class="project-hero section-shell quadruped-project-hero">
+      <div class="project-hero-grid">
+        <div class="project-hero-copy">
           <p class="page-kicker">Core project 02 · EtherCAT torque control</p>
           <h1>55 kg quadruped</h1>
           <p class="lede">I worked on the software and control path from a PPO locomotion policy to 12 EtherCAT drives in CiA-402 Profile Torque mode, with joint-level recordings used to investigate deployment mismatch.</p>
         </div>
-        <figure class="hero-media">
-          <img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped standing in a laboratory">
+        <figure class="project-hero-media quadruped-hero-media">
+          <img src="assets/images/quadruped-hardware-hd.jpg" alt="55 kg quadruped standing in a laboratory">
           <figcaption><strong>55 kg quadruped.</strong> Hardware platform used for the EtherCAT deployment work.</figcaption>
         </figure>
-        <ul class="project-summary">
+        <ul class="project-summary project-facts">
           <li><span>Period</span><div>September 2025-June 2026</div></li>
           <li><span>Platform</span><div>55 kg · 12 actuators</div></li>
           <li><span>Policy</span><div>45-D observation → 12-D action · implemented at 50 Hz</div></li>
@@ -32,7 +32,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section architecture-section">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">Control architecture</p>
@@ -98,7 +98,7 @@
             <text class="svg-note" x="892" y="467">physical feedback</text>
 
             <rect class="node blue" x="445" y="407" width="170" height="70" rx="3"/>
-            <text class="svg-label" x="459" y="434">State / observation update</text>
+            <text class="svg-label" x="459" y="434">Observation update</text>
             <text class="svg-small" x="459" y="452">coordinate mapping + scaling</text>
             <text class="svg-note" x="459" y="467">policy input at next step</text>
 
@@ -126,7 +126,7 @@
       </div>
     </section>
 
-    <section class="section soft">
+    <section class="section soft role-section">
       <div class="section-shell role-grid">
         <div>
           <p class="eyebrow">My Role</p>
@@ -163,12 +163,14 @@
           <p class="eyebrow">Hardware record</p>
           <div><h2>Platform, test setup, and joint tracking.</h2><p>The images show the physical platform and bench context. The curve is a retained command-versus-measurement diagnostic, not a summarized tracking score.</p></div>
         </div>
-        <div class="media-grid">
-          <figure><img src="assets/images/quadruped-bench.jpg" alt="Quadruped suspended in a laboratory bench setup"><figcaption><strong>Bench setup.</strong> A retained image from controlled work around the platform.</figcaption></figure>
-          <figure><img class="chart-image" src="assets/images/quadruped-joint-tracking.png" alt="Desired and measured front-left quadruped joint tracking curves"><figcaption><strong>Desired versus measured joints.</strong> Retained PACE chirp visualization for the front-left leg.</figcaption></figure>
+        <div class="quadruped-evidence-layout">
+          <figure class="media-figure tracking-figure"><img class="chart-image" src="assets/images/quadruped-tracking-hd.png" alt="Desired and measured front-left quadruped joint tracking curves"><figcaption><strong>Desired versus measured joints.</strong> Retained PACE chirp visualization for the front-left leg.</figcaption></figure>
+          <div class="quadruped-evidence-aside">
+            <figure class="media-figure"><img src="assets/images/quadruped-pace-hd.jpg" alt="Quadruped in a laboratory data collection setup"><figcaption><strong>PACE data collection.</strong> Hardware setup associated with joint-level diagnosis.</figcaption></figure>
+            <figure class="media-figure"><img class="contain-image" src="assets/images/quadruped-simulation-hd.png" alt="Quadruped model in Isaac Sim"><figcaption><strong>Simulation model.</strong> Isaac Sim environment used during the deployment workflow.</figcaption></figure>
+          </div>
         </div>
-        <div class="single-media" style="margin-top:18px">
-          <figure><video controls muted playsinline preload="metadata" poster="assets/images/quadruped-pace-poster.jpg"><source src="assets/video/quadruped-pace.mp4" type="video/mp4"></video><figcaption><strong>PACE data collection.</strong> Representative video associated with joint-level diagnosis.</figcaption></figure>
+        <figure class="media-figure landscape-video quadruped-video"><video controls muted playsinline preload="metadata" poster="assets/images/quadruped-pace-hd.jpg"><source src="assets/video/quadruped-pace-original.mp4" type="video/mp4"></video><figcaption><strong>PACE data collection.</strong> Representative video associated with joint-level diagnosis.</figcaption></figure>
         </div>
       </div>
     </section>

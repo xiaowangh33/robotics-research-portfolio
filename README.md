@@ -1,8 +1,7 @@
-# Robotics Research Portfolio V2
+# Robotics Research Portfolio
 
-This is the local V2 working copy of Wang Gufan's static robotics portfolio.
-The V1 directory beside it is retained as the backup of the previously
-completed site. V2 has not been deployed or pushed to Vercel.
+This repository contains Wang Gufan's static robotics research portfolio.
+The production site is deployed on Vercel from the `main` branch.
 
 ## Local preview
 
