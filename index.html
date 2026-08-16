@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Wang Gufan's robotics research portfolio: reliable learned and model-based control beyond simulation assumptions.">
-  <title>Wang Gufan · Robotics Research Portfolio</title>
+  <meta name="description" content="Wang Gufan's robotics research portfolio: real-robot locomotion, Sim2Real, and real-time systems.">
+  <title>Robotics Research Portfolio · Wang Gufan</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -15,169 +15,89 @@
     <section class="home-hero section-shell">
       <div class="home-hero-grid">
         <div>
-          <p class="eyebrow">ROBOTICS RESEARCH · REAL-TIME CONTROL · SIM2REAL</p>
-          <h1>When timing slips,<span class="line-two">the plant changes.</span></h1>
-          <p class="lede">I build locomotion systems at the boundary between learned policies, embedded control, and real hardware—and study what breaks when their assumptions stop agreeing.</p>
+          <p class="eyebrow">Robotics · real-robot control · Sim2Real</p>
+          <h1>Robotics Research Portfolio</h1>
+          <p class="lede">I am an undergraduate robotics engineering student working on reliable locomotion, Sim2Real deployment, and real-time uncertainty in physical robot systems. My recent work spans a 25 kg wheel-legged robot and a 55 kg EtherCAT quadruped.</p>
           <div class="button-row">
-            <a class="button" href="#core-work">Start with hardware evidence ↓</a>
-            <a class="button ghost" href="research.html">Read the proposed direction</a>
+            <a class="button" href="#selected-work">View selected projects</a>
+            <a class="button ghost" href="assets/downloads/Wang_Gufan_CV.pdf" download>Download CV</a>
           </div>
         </div>
-        <aside class="hero-note">
-          <p class="eyebrow">FALL 2027 PHD FOCUS</p>
-          <p>Reliable, timing-aware control for legged and wheel-legged robots under model mismatch, stale sensing, actuation delay, jitter, and missed cycles.</p>
+        <aside class="research-note">
+          <p class="eyebrow">Research Interests</p>
+          <p>Reliable legged and wheel-legged locomotion when model mismatch, sensing age, actuation delay, and scheduling variability affect the closed loop.</p>
         </aside>
       </div>
     </section>
 
-    <section class="research-question section-shell reveal">
-      <div class="question-card">
-        <span class="index">RESEARCH QUESTION / 01</span>
-        <blockquote>How can learned and model-based robot controllers remain reliable when real-world dynamics, sensing, actuation, and timing depart from the assumptions used in simulation and planning?</blockquote>
+    <section class="section-shell tight">
+      <div class="topic-line">
+        <strong>RESEARCH THEME</strong>
+        <p>When timing slips, the plant changes. I am interested in making that systems fact measurable and useful for control.</p>
       </div>
     </section>
 
-    <section class="section-shell reveal" aria-label="Wheel-legged robot field evidence">
-      <div class="hero-media">
-        <video controls muted playsinline preload="metadata" poster="assets/images/wheel-outdoor-poster.jpg">
-          <source src="assets/video/wheel-outdoor.mp4" type="video/mp4">
-        </video>
-        <div class="media-overlay">
-          <div><strong>25 kg wheel-legged robot</strong><span>Outdoor hardware deployment · 2026</span></div>
-          <span class="media-tag">Real robot video / with controls</span>
-        </div>
-      </div>
-      <div class="metric-strip">
-        <div class="metric"><strong>25 kg</strong><span>Wheel-legged platform</span></div>
-        <div class="metric"><strong>16</strong><span>Actuators · 12 joints + 4 wheels</span></div>
-        <div class="metric"><strong>50 Hz</strong><span>Learned locomotion policy</span></div>
-        <div class="metric"><strong>500 Hz</strong><span>Per-motor CAN refresh</span></div>
-      </div>
-    </section>
-
-    <section class="section dark">
+    <section id="selected-work" class="section">
       <div class="section-shell">
-        <div class="section-heading reveal">
-          <div><p class="eyebrow light">RESEARCH POSITION</p></div>
+        <div class="section-heading">
+          <p class="eyebrow">Selected hardware work</p>
           <div>
-            <h2>Reliability is a property of the whole loop.</h2>
-            <p>A policy may be correct for its simulator and still fail because the state is old, the action arrives late, the actuator model is wrong, or two devices disagree about which control epoch they belong to.</p>
+            <h2>Two control stacks, examined on real robots.</h2>
+            <p>These project pages focus on what I built, how the control path was instrumented, and the evidence retained from deployment.</p>
           </div>
         </div>
-        <div class="principle-grid reveal">
-          <article class="principle">
-            <span class="num">01 / MISMATCH</span>
-            <h3>Mismatch is structured.</h3>
-            <p>Mass, friction, actuator delay, joint offsets, static friction, gains, and coordinate conventions leave different signatures. Instrumentation should help distinguish them.</p>
-          </article>
-          <article class="principle">
-            <span class="num">02 / TIMING</span>
-            <h3>Timing is part of the plant.</h3>
-            <p>At 50 Hz policy inference over 500 Hz–2 kHz lower-level loops, observation age and action age alter the effective closed-loop dynamics.</p>
-          </article>
-          <article class="principle">
-            <span class="num">03 / CONFIDENCE</span>
-            <h3>Uncertainty should change behavior.</h3>
-            <p>A controller needs more than a point prediction. Calibrated confidence could determine when to continue, slow down, replan, or choose a lower-risk action.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="core-work" class="section">
-      <div class="section-shell">
-        <div class="section-heading reveal">
-          <div><p class="eyebrow">CORE HARDWARE WORK</p></div>
-          <div>
-            <h2>Two robots. One continuous research problem.</h2>
-            <p>The projects are presented as a sequence: first, make distributed RL locomotion survive physical disturbances; then, trace model and actuator mismatch through a faster EtherCAT torque-control stack.</p>
-          </div>
-        </div>
-        <div class="project-grid">
-          <a class="project-card reveal" href="wheel-legged.html">
-            <div class="project-image"><img src="assets/images/wheel-disturbance-poster.jpg" alt="25 kg wheel-legged robot during a disturbance test"></div>
-            <div class="project-copy">
-              <div class="project-topline"><span>CORE PROJECT 01</span><span>May–Aug 2026</span></div>
-              <h3>25 kg wheel-leg RL Sim2Real</h3>
-              <p>From simulation-stable PPO to real standing, rolling locomotion, stair behavior, and kick recovery through dynamics randomization, multi-rate integration, and observation-freshness safeguards.</p>
-              <div class="project-tags">
-                <span class="tag verified">Hardware verified</span><span class="tag">PPO</span><span class="tag">CAN</span><span class="tag">Dual MCU</span>
-              </div>
+        <div class="selected-work">
+          <a class="project-card" href="wheel-legged.html">
+            <img src="assets/images/wheel-hardware.jpg" alt="25 kg wheel-legged robot during an outdoor hardware test">
+            <div>
+              <div class="project-meta"><span>Core project 01</span><span>May-Aug 2026</span></div>
+              <h3>25 kg wheel-legged robot</h3>
+              <p>PPO deployment through ONNX, Linux shared memory, dual MCUs, and four CAN buses for 16 actuators.</p>
+              <div class="tag-row"><span class="tag hardware">Hardware deployment</span><span class="tag">PPO</span><span class="tag">CAN</span></div>
             </div>
           </a>
-          <a class="project-card reveal" href="quadruped.html">
-            <div class="project-image"><img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped robot in the laboratory"></div>
-            <div class="project-copy">
-              <div class="project-topline"><span>CORE PROJECT 02</span><span>Sep 2025–Jun 2026</span></div>
-              <h3>55 kg quadruped EtherCAT Sim2Real</h3>
-              <p>A complete software and control path from an RL policy to 12 Profile-Torque drives, with diagnosis centered on actuator delay, static friction, model parameters, and desired-versus-measured joint motion.</p>
-              <div class="project-tags">
-                <span class="tag verified">Hardware verified</span><span class="tag">EtherCAT</span><span class="tag">Torque control</span><span class="tag">2 kHz bus</span>
-              </div>
+          <a class="project-card" href="quadruped.html">
+            <img src="assets/images/quadruped-hardware.jpg" alt="55 kg quadruped robot in a laboratory test setup">
+            <div>
+              <div class="project-meta"><span>Core project 02</span><span>Sep 2025-Jun 2026</span></div>
+              <h3>55 kg EtherCAT quadruped</h3>
+              <p>From a PPO policy to 12 CiA-402 torque drives, with desired-versus-measured joint traces used for diagnosis.</p>
+              <div class="tag-row"><span class="tag hardware">Hardware deployment</span><span class="tag">EtherCAT</span><span class="tag">Torque control</span></div>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <section class="section soft">
+    <section class="section dark">
       <div class="section-shell">
-        <div class="section-heading reveal">
-          <div><p class="eyebrow">THE EVIDENCE CHAIN</p></div>
-          <div><h2>The research direction grew out of deployment work—not a detached topic choice.</h2></div>
-        </div>
-        <div class="evidence-chain reveal">
-          <article class="evidence-step">
-            <span>OBSERVED</span>
-            <h3>Simulation success did not identify the hardware failure mode.</h3>
-            <p>Oscillation after impact, delayed joint response, static friction, and command/measurement mismatch looked different on the machine than in the nominal model.</p>
-          </article>
-          <article class="evidence-step">
-            <span>INSTRUMENTED</span>
-            <h3>The communication path became part of the experiment.</h3>
-            <p>Timestamped epochs, shared-memory interfaces, desired/measured logging, motor-feedback freshness, and explicit policy tensor contracts made failures traceable.</p>
-          </article>
-          <article class="evidence-step">
-            <span>REFRAMED</span>
-            <h3>Delay and jitter should become state, not hidden noise.</h3>
-            <p>The next question is whether a short-horizon predictor can estimate both current state and confidence, then let RL or MPC respond to the risk.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="proposal-band">
-      <div class="section-shell proposal-grid reveal">
-        <div>
-          <span class="proposal-label">PROPOSED RESEARCH · NOT COMPLETED WORK</span>
-          <h2>Timing-aware state prediction and confidence for RL/MPC.</h2>
-        </div>
-        <div>
-          <p class="lede">Estimate a short-horizon distribution over the robot state from recent observations, commands, action history, and timing metadata—then use calibrated uncertainty to change control decisions under stale sensing and delayed actuation.</p>
-          <div class="button-row"><a class="button" href="research.html">See hypothesis, method, and evaluation →</a></div>
+        <div class="fact-strip" aria-label="Selected system facts">
+          <div><strong>25 kg</strong><span>wheel-legged platform</span></div>
+          <div><strong>16</strong><span>CAN-controlled actuators</span></div>
+          <div><strong>55 kg</strong><span>EtherCAT quadruped platform</span></div>
+          <div><strong>12</strong><span>CiA-402 torque drives</span></div>
         </div>
       </div>
     </section>
 
     <section class="section dark">
-      <div class="section-shell fit-preview reveal">
+      <div class="section-shell interest-grid">
         <div>
-          <p class="eyebrow light">RESEARCH FIT</p>
-          <h2 data-fit-short>FSU · OPTIMAL ROBOTICS LABORATORY</h2>
+          <p class="eyebrow">From deployment to research</p>
+          <h2>Questions I hope to explore in doctoral study.</h2>
+          <p>Deployment experience has made me interested in controllers that account for what was observed, when it was observed, and how confidently the current state can be estimated.</p>
+          <div class="button-row"><a class="button ghost" href="research.html">Research interests and possible methods</a></div>
         </div>
-        <div class="fit-copy">
-          <p data-fit-intro>ORL is a particularly strong fit because its work treats locomotion as a coupled problem in dynamics, optimization, adaptation, and physical failure—not as policy inference in isolation.</p>
-          <p class="small">Personalized for Christian Hubicki / ORL. This module is isolated from the project evidence so the portfolio remains reusable for other PhD applications.</p>
-          <div class="button-row"><a class="button" href="research.html#orl-fit">Read the specific research connections →</a></div>
-        </div>
+        <ol class="interest-list">
+          <li><span>01</span><div><strong>Timing-aware state estimation</strong><br>How can timestamps, action history, jitter, and missed cycles inform a current-state estimate?</div></li>
+          <li><span>02</span><div><strong>Failure-adaptive control</strong><br>When should uncertainty change an RL or MPC controller's action, speed, or risk level?</div></li>
+          <li><span>03</span><div><strong>Hybrid locomotion on hardware</strong><br>How do contact changes, wheel motion, and real transport delays interact in a complete loop?</div></li>
+        </ol>
       </div>
     </section>
   </main>
 
   <div data-site-footer></div>
-  <script src="js/fit-profile.js"></script>
-  <script src="js/site.js?v=20260816"></script>
-  <script src="js/i18n.js?v=20260816"></script>
+  <script src="js/site.js?v=20260816-v2"></script>
 </body>
 </html>
-
