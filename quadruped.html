@@ -68,10 +68,10 @@
             <text class="svg-small" x="462" y="191">12 × [kp, qd, kd,</text>
             <text class="svg-small" x="462" y="205">dqd, τff]</text>
 
-            <rect class="node orange" x="638" y="132" width="147" height="103" rx="3"/>
-            <text class="svg-label" x="652" y="161">PD control</text>
-            <text class="svg-small" x="652" y="179">τ = kp(qd-q)+kd(dqd-dq)</text>
-            <text class="svg-note" x="652" y="211">1 kHz recompute · ZOH</text>
+            <rect class="node orange" x="634" y="132" width="147" height="103" rx="3"/>
+            <text class="svg-label" x="648" y="161">PD control</text>
+            <text class="svg-small" x="648" y="179">τ = kp(qd-q)+kd(dqd-dq)</text>
+            <text class="svg-note" x="648" y="211">1 kHz recompute · ZOH</text>
 
             <rect class="node dark" x="844" y="132" width="142" height="103" rx="3"/>
             <text class="svg-label" x="858" y="161">SOEM / EtherCAT</text>
@@ -86,11 +86,11 @@
 
             <path class="edge" d="M181 184 H239"/>
             <path class="edge" d="M390 184 H448"/>
-            <path class="edge" d="M580 184 H638"/>
-            <path class="edge" d="M785 184 H844"/>
+            <path class="edge" d="M580 184 H634"/>
+            <path class="edge" d="M781 184 H844"/>
             <path class="edge" d="M986 184 H1024"/>
-            <text class="signal" x="401" y="172">12 targets</text>
-            <text class="signal" x="792" y="172">torque PDO</text>
+            <text class="signal" x="419" y="172">12 targets</text>
+            <text class="signal" x="812" y="172">torque PDO</text>
 
             <rect class="node" x="878" y="407" width="171" height="70" rx="3"/>
             <text class="svg-label" x="892" y="434">Quadruped + sensors</text>
@@ -103,11 +103,11 @@
             <text class="svg-note" x="459" y="467">policy input at next step</text>
 
             <path class="edge feedback" d="M1052 223 V442 H1049"/>
-            <path class="edge feedback" d="M878 442 H785 V234"/>
-            <text class="signal orange" x="795" y="431">q, dq for PD</text>
-            <path class="edge feedback" d="M878 458 H615"/>
+            <path class="edge feedback" d="M963 407 V292 H711 V235"/>
+            <text class="signal orange" x="837" y="282">q, dq for PD</text>
+            <path class="edge feedback" d="M963 477 V492 H530 V477"/>
             <path class="edge feedback" d="M445 442 H275 V223"/>
-            <text class="signal orange" x="628" y="447">joint + IMU feedback</text>
+            <text class="signal orange" x="747" y="506">joint + IMU feedback</text>
 
             <rect class="node orange" x="58" y="405" width="180" height="72" rx="3"/>
             <text class="svg-label" x="72" y="433">Possible timing effects</text>

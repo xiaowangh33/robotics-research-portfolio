@@ -144,21 +144,23 @@ figcaption strong { color: var(--ink); }
 .architecture-figure { margin: 0; overflow-x: auto; background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); scrollbar-color: var(--blue) var(--paper-2); }
 .architecture-figure svg { width: 100%; min-width: 1020px; height: auto; }
 .architecture-figure figcaption { padding: 15px 18px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.5; }
-.architecture-figure .svg-title { fill: #24313a; font: 700 19px/1 var(--sans); }
-.architecture-figure .svg-label { fill: #25343d; font: 650 14.2px/1 var(--sans); }
-.architecture-figure .svg-small { fill: #56656e; font: 500 12px/1 var(--mono); }
-.architecture-figure .svg-note { fill: #a85834; font: 650 12px/1 var(--mono); }
-.architecture-figure .node { fill: #f7f6f1; stroke: #75828a; stroke-width: 1.2; }
+.architecture-figure text { font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif; text-rendering: geometricPrecision; }
+.architecture-figure .svg-title { fill: #24313a; font-size: 19px; font-weight: 700; }
+.architecture-figure .svg-label { fill: #25343d; font-size: 14px; font-weight: 650; }
+.architecture-figure .svg-small { fill: #56656e; font-size: 11.5px; font-weight: 500; letter-spacing: .01em; }
+.architecture-figure .svg-note { fill: #a85834; font-size: 11.5px; font-weight: 650; letter-spacing: .01em; }
+.architecture-figure .node { fill: #f7f6f1; stroke: #75828a; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 .architecture-figure .node.blue { fill: #e6f0f3; stroke: #47809a; }
 .architecture-figure .node.orange { fill: #f9e9e1; stroke: #b76139; }
 .architecture-figure .node.dark { fill: #e5ebed; stroke: #51636d; }
-.architecture-figure .lane { fill: #f7f7f4; stroke: #c7cecd; stroke-width: 1; }
-.architecture-figure .edge { fill: none; stroke: #294c5d; stroke-width: 1.8; marker-end: url(#arrow); }
+.architecture-figure .lane { fill: #f7f7f4; stroke: #c7cecd; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.architecture-figure .edge { fill: none; stroke: #294c5d; stroke-width: 1.8; stroke-linecap: square; stroke-linejoin: round; vector-effect: non-scaling-stroke; shape-rendering: geometricPrecision; marker-end: url(#arrow); }
 .architecture-figure .edge.feedback { stroke: #b8613a; stroke-width: 2; marker-end: url(#orangeArrow); }
 .architecture-figure .edge.dashed { stroke: #ae6b4a; stroke-dasharray: 6 5; marker-end: url(#orangeArrow); }
 .architecture-figure .edge.thin { stroke-width: 1.25; }
-.architecture-figure .signal { fill: #2c5668; font: 650 11px/1 var(--mono); }
+.architecture-figure .signal { fill: #2c5668; stroke: #f7f7f4; stroke-width: 6px; stroke-linejoin: round; paint-order: stroke fill; font-size: 10.5px; font-weight: 700; letter-spacing: .01em; text-anchor: middle; }
 .architecture-figure .signal.orange { fill: #a85533; }
+.architecture-figure .signal.signal-end { text-anchor: end; }
 .architecture-figure .separator { stroke: #ccd1d0; stroke-width: 1; }
 
 /* Evidence and media: natural aspect ratios, no card-height normalization. */

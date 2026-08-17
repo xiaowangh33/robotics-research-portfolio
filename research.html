@@ -125,14 +125,14 @@
             <path class="edge" d="M484 177 H542"/>
             <path class="edge" d="M747 177 H805"/>
             <path class="edge" d="M973 177 H1008"/>
-            <text class="signal" x="326" y="124">aligned history</text>
-            <text class="signal" x="758" y="116">belief + confidence</text>
+            <text class="signal" x="395" y="124">aligned history</text>
+            <text class="signal" x="776" y="116">belief + confidence</text>
 
             <rect class="node" x="875" y="415" width="175" height="61" rx="3"/>
             <text class="svg-label" x="889" y="442">Robot and low-level loop</text>
             <text class="svg-small" x="889" y="459">physical state and applied action</text>
             <path class="edge" d="M1046 223 V415 H1033"/>
-            <text class="signal" x="1038" y="309" text-anchor="end">control action</text>
+            <text class="signal signal-end" x="1032" y="320">control action</text>
 
             <rect class="node orange" x="560" y="405" width="209" height="81" rx="3"/>
             <text class="svg-label" x="574" y="433">Observed timing events</text>
@@ -147,9 +147,9 @@
             <path class="edge feedback" d="M875 446 H769"/>
             <path class="edge feedback" d="M560 446 H400"/>
             <path class="edge feedback" d="M148 446 H91 V275 H150 V223"/>
-            <text class="signal orange" x="430" y="396">timing metadata</text>
+            <text class="signal orange" x="480" y="396">timing metadata</text>
             <path class="edge dashed thin" d="M950 415 V300 H1007 V223"/>
-            <text class="signal orange" x="956" y="290">applied-action timing</text>
+            <text class="signal orange" x="954" y="292">applied-action timing</text>
           </svg>
           <figcaption>Possible method: timestamped state/action history and timing metadata feed a short-horizon predictor; predicted state and confidence then inform an RL or MPC controller. The dashed path distinguishes command issue time from action application time.</figcaption>
         </figure>
