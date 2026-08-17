@@ -362,8 +362,10 @@
     "The available archive contains individual model runs and field media; it does not establish a public end-to-end accuracy result for the combined system.": "可用归档包含单个模型运行记录和现场媒体，但不足以证明组合系统的公开端到端精度结果。",
     "Field setting.": "现场环境。",
     "Magnetic inspection robot at the hydropower deployment site.": "水电站部署现场的磁吸巡检机器人。",
-    "Mechanical transition.": "机械过渡。",
-    "Retained record of an inverted right-angle transition.": "倒置直角过渡的留存记录。",
+    "Inverted right-angle transition.": "倒置直角过渡。",
+    "Hardware record of the magnetic robot completing the maneuver.": "磁吸机器人完成该动作的真机记录。",
+    "Transition setup.": "过渡设置。",
+    "Inverted right-angle test geometry.": "倒置直角测试结构。",
     "Research relevance": "研究关联",
     "Control laws depend on the systems that carry them.": "控制律依赖于承载它们的系统。",
     "These projects reinforced a practical lesson from the locomotion work: operating systems, fieldbuses, sensing, mechanics, and site conditions all shape what a controller can observe and execute.": "这些项目强化了运动控制工作中的一个实践经验：操作系统、现场总线、感知、机械结构和现场条件都会塑造控制器能观测和执行的内容。",
@@ -386,6 +388,8 @@
     "Magnesium alloy property modeling": "镁合金性能建模",
     "For a small materials dataset, I worked on data augmentation and regression workflows using a Transformer, MLP, and stacking approach to predict yield strength, elongation, and ultimate tensile strength from composition and process variables.": "针对小型材料数据集，我参与了数据增强和回归流程，使用 Transformer、MLP 和 stacking 方法，根据成分与工艺变量预测屈服强度、延伸率和抗拉强度。",
     "Small-data learning": "小数据学习",
+    "Temperature-field evolution.": "温度场演化。",
+    "Time-varying PINN output across the heating cycle.": "加热周期内的时变 PINN 输出。",
     "Manuscript-associated work": "论文关联工作",
     "Outputs currently listed in the available materials.": "当前可用材料中列出的产出。",
     "Full bibliographic details and public links can be added when confirmed.": "完整书目信息和公开链接可在确认后补充。",
@@ -461,7 +465,9 @@
     "55 kg quadruped walking outdoors": "55 kg 四足机器人在户外行走",
     "Quadruped model in Isaac Sim": "Isaac Sim 中的四足机器人模型",
     "Simplified timing-aware state estimation method": "简化的时序感知状态估计方法",
-    "Temperature field from a physics-informed neural network project": "物理信息神经网络项目的温度场"
+    "Temperature field from a physics-informed neural network project": "物理信息神经网络项目的温度场",
+    "Magnetic climbing robot completing an inverted right-angle transition": "完成倒置直角过渡的磁吸爬壁机器人",
+    "Time-varying PINN temperature field evolution": "时变 PINN 温度场演化"
   };
 
   const documentText = {

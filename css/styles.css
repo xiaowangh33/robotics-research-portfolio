@@ -213,7 +213,9 @@ figcaption { padding: 11px 14px 13px; color: var(--muted); font-size: 13px; line
 .system-motion-visual { display: grid; justify-items: center; }
 .upper-limb-video { width: min(100%, 390px); }
 .field-media-stack { display: grid; grid-template-columns: .82fr 1.18fr; gap: 22px; align-items: start; }
-.field-photo { margin-top: 54px; }
+.field-transition-video { grid-column: 1 / -1; }
+.field-transition-video video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: var(--dark); }
+.field-photo { margin-top: 0; }
 .field-photo img { width: 100%; height: auto; object-fit: contain; }
 .field-transition img { aspect-ratio: 16 / 9; object-fit: cover; }
 
@@ -265,6 +267,8 @@ figcaption { padding: 11px 14px 13px; color: var(--muted); font-size: 13px; line
 .additional-project + .additional-project { padding-left: 42px; border-left: 1px solid var(--line); }
 .additional-project h2 { font-size: 30px; }
 .additional-project p { color: var(--muted); }
+.pinn-evolution-video { width: min(100%, 760px); margin: 30px auto 0; }
+.pinn-evolution-video video { display: block; width: 100%; aspect-ratio: 5 / 4; object-fit: contain; background: var(--white); }
 .publication-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
 .publication-list li { display: grid; grid-template-columns: 130px 1fr; gap: 30px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .publication-list span { color: var(--blue); font: 700 10px/1.4 var(--mono); }
@@ -363,6 +367,7 @@ figcaption { padding: 11px 14px 13px; color: var(--muted); font-size: 13px; line
   .architecture-figure svg { min-width: 980px; }
   .architecture-figure figcaption { position: sticky; left: 0; max-width: calc(100vw - 28px); background: var(--white); }
   .quadruped-evidence-aside, .field-media-stack { grid-template-columns: 1fr; }
+  .field-transition-video { grid-column: 1; }
   .field-photo { margin-top: 0; }
   .systems-hero-visuals { min-height: 0; padding: 0; }
   .systems-field-inset { width: min(68%, 210px); }
