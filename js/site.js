@@ -19,7 +19,6 @@
         </a>
         <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
           ${nav.map(([id, label, href]) => `<a href="${href}" ${id === current ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
-          <a class="nav-cv" href="assets/downloads/Wang_Gufan_CV.pdf" download>Download CV</a>
         </nav>
         <button class="language-toggle" type="button" data-language-toggle aria-label="切换为简体中文" title="切换为简体中文">中文</button>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -48,7 +47,6 @@
           <span>University of Science and Technology Beijing</span>
           <span>B.Eng. Robotics Engineering · expected 2027</span>
           <a href="mailto:gufan.wang.ustb@gmail.com">gufan.wang.ustb@gmail.com</a>
-          <a class="footer-cv" href="assets/downloads/Wang_Gufan_CV.pdf" download>Download CV (PDF)</a>
           <span class="availability-note">Selected code available upon request.</span>
         </div>
         <div class="footer-base">

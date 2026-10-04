@@ -8,14 +8,13 @@
   // The map intentionally translates visible prose node-by-node, so the English source
   // remains the single maintained version of each page.
   const zh = {
+    "Wang Gufan": "王谷凡",
     "Overview": "概览",
     "Wheel-leg": "轮足机器人",
     "Quadruped": "四足机器人",
     "Systems": "系统工程",
     "Research interests": "研究兴趣",
     "Additional work": "补充工作",
-    "Download CV": "下载简历",
-    "Download CV (PDF)": "下载简历（PDF）",
     "Toggle navigation": "切换导航",
     "Contact": "联系",
     "Back to top ↑": "返回顶部 ↑",
@@ -446,7 +445,7 @@
   };
 
   const attributes = {
-    "Wang Gufan portfolio home": "王古帆作品集首页",
+    "Wang Gufan portfolio home": "王谷凡作品集首页",
     "Primary navigation": "主导航",
     "Wheel-legged robot on pavement during a hardware test": "硬件测试中位于铺装地面的轮足机器人",
     "Wheel-legged robot traveling on an outdoor path": "在户外路径上行进的轮足机器人",
@@ -471,12 +470,12 @@
   };
 
   const documentText = {
-    "Robotics Research Portfolio · Wang Gufan": "机器人研究作品集 · 王古帆",
-    "25 kg Wheel-Legged Robot · Wang Gufan": "25 kg 轮足机器人 · 王古帆",
-    "55 kg EtherCAT Quadruped · Wang Gufan": "55 kg EtherCAT 四足机器人 · 王古帆",
-    "Systems & Field Robotics · Wang Gufan": "系统工程与现场机器人 · 王古帆",
-    "Research Interests · Wang Gufan": "研究兴趣 · 王古帆",
-    "Additional Work · Wang Gufan": "补充工作 · 王古帆"
+    "Robotics Research Portfolio · Wang Gufan": "机器人研究作品集 · 王谷凡",
+    "25 kg Wheel-Legged Robot · Wang Gufan": "25 kg 轮足机器人 · 王谷凡",
+    "55 kg EtherCAT Quadruped · Wang Gufan": "55 kg EtherCAT 四足机器人 · 王谷凡",
+    "Systems & Field Robotics · Wang Gufan": "系统工程与现场机器人 · 王谷凡",
+    "Research Interests · Wang Gufan": "研究兴趣 · 王谷凡",
+    "Additional Work · Wang Gufan": "补充工作 · 王谷凡"
   };
 
   function getLanguage() {
