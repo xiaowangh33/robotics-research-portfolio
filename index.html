@@ -6,7 +6,7 @@
   <meta name="description" content="Wang Gufan's robotics research portfolio: real-robot locomotion, Sim2Real, and real-time systems.">
   <title>Robotics Research Portfolio · Wang Gufan</title>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261004-layout">
 </head>
 <body id="top" data-page="home">
   <div data-site-header></div>
@@ -14,90 +14,72 @@
   <main>
     <section class="home-hero section-shell">
       <div class="home-hero-grid">
-        <div>
-          <p class="eyebrow">Robotics · real-robot control · Sim2Real</p>
-          <h1>Robotics Research Portfolio</h1>
-          <p class="lede">I am an undergraduate robotics engineering student working on reliable locomotion, Sim2Real deployment, and real-time uncertainty in physical robot systems. My recent work spans a 25 kg wheel-legged robot and a 55 kg EtherCAT quadruped.</p>
-          <div class="button-row">
-            <a class="button" href="#selected-work">View selected projects</a>
+        <div class="home-hero-copy">
+          <p class="eyebrow">Robotics Research Portfolio</p>
+          <h1>Wang Gufan</h1>
+          <p class="hero-focus">Real-robot control<br><span>&amp; locomotion.</span></p>
+          <p class="lede">I work on learned locomotion and the real-time systems that bring policies from simulation onto physical robots.</p>
+          <div class="button-row home-actions">
+            <a class="button" href="#selected-work"><span>View selected projects</span><span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="research.html"><span>Research interests</span><span aria-hidden="true">↗</span></a>
           </div>
-          <aside class="research-note">
-            <p class="eyebrow">Research Interests</p>
-            <p>Reliable legged and wheel-legged locomotion when model mismatch, sensing age, actuation delay, and scheduling variability affect the closed loop.</p>
-          </aside>
         </div>
         <figure class="home-hero-visual">
           <div class="hero-collage">
             <img class="hero-primary" src="assets/images/wheel-hero-hd.jpg" alt="Wheel-legged robot on pavement during a hardware test">
             <img class="hero-secondary" src="assets/images/quadruped-hardware-hd.jpg" alt="55 kg quadruped standing in a laboratory">
           </div>
-          <figcaption><strong>Real-robot platforms.</strong> Wheel-legged outdoor deployment and the 55 kg EtherCAT quadruped.</figcaption>
+          <figcaption>Wheel-legged outdoor tests and quadruped hardware.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section-shell tight">
-      <div class="topic-line">
-        <strong>RESEARCH THEME</strong>
-        <p>When timing slips, the plant changes. I am interested in making that systems fact measurable and useful for control.</p>
-      </div>
-    </section>
-
-    <section id="selected-work" class="section">
+    <section id="selected-work" class="section home-work">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow">Selected hardware work</p>
           <div>
-            <h2>Two control stacks, examined on real robots.</h2>
-            <p>These project pages focus on what I built, how the control path was instrumented, and the evidence retained from deployment.</p>
+            <h2>Two real-robot control projects.</h2>
+            <p>Policy deployment, control-system integration, and hardware validation.</p>
           </div>
         </div>
         <div class="selected-work">
           <a class="project-card" href="wheel-legged.html">
-            <img src="assets/images/wheel-red-track-hd.jpg" alt="25 kg wheel-legged robot during an outdoor hardware test">
-            <div>
+            <div class="project-image"><img src="assets/images/wheel-red-track-hd.jpg" alt="25 kg wheel-legged robot during an outdoor hardware test" loading="lazy"></div>
+            <div class="project-copy">
               <div class="project-meta"><span>Core project 01</span><span>May-Aug 2026</span></div>
               <h3>25 kg wheel-legged robot</h3>
-              <p>PPO deployment through ONNX, Linux shared memory, dual MCUs, and four CAN buses for 16 actuators.</p>
+              <p>Learning-based locomotion with a synchronized dual-MCU CAN control stack.</p>
               <div class="tag-row"><span class="tag hardware">Hardware deployment</span><span class="tag">PPO</span><span class="tag">CAN</span></div>
+              <div class="project-link"><span>View case study</span><span aria-hidden="true">↗</span></div>
             </div>
           </a>
           <a class="project-card" href="quadruped.html">
-            <img src="assets/images/quadruped-hardware-hd.jpg" alt="55 kg quadruped robot in a laboratory test setup">
-            <div>
+            <div class="project-image"><img src="assets/images/quadruped-hardware-hd.jpg" alt="55 kg quadruped robot in a laboratory test setup" loading="lazy"></div>
+            <div class="project-copy">
               <div class="project-meta"><span>Core project 02</span><span>Sep 2025-Jun 2026</span></div>
               <h3>55 kg EtherCAT quadruped</h3>
-              <p>From a PPO policy to 12 CiA-402 torque drives, with desired-versus-measured joint traces used for diagnosis.</p>
+              <p>EtherCAT torque-control integration and joint-level diagnosis of Sim2Real mismatch.</p>
               <div class="tag-row"><span class="tag hardware">Hardware deployment</span><span class="tag">EtherCAT</span><span class="tag">Torque control</span></div>
+              <div class="project-link"><span>View case study</span><span aria-hidden="true">↗</span></div>
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <section class="section dark">
-      <div class="section-shell">
-        <div class="fact-strip" aria-label="Selected system facts">
-          <div><strong>25 kg</strong><span>wheel-legged platform</span></div>
-          <div><strong>16</strong><span>CAN-controlled actuators</span></div>
-          <div><strong>55 kg</strong><span>EtherCAT quadruped platform</span></div>
-          <div><strong>12</strong><span>CiA-402 torque drives</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark">
+    <section class="section dark home-research">
       <div class="section-shell interest-grid">
         <div>
           <p class="eyebrow">From deployment to research</p>
-          <h2>Questions I hope to explore in future research.</h2>
-          <p>Deployment experience has made me interested in controllers that account for what was observed, when it was observed, and how confidently the current state can be estimated.</p>
-          <div class="button-row"><a class="button ghost" href="research.html">Research interests and possible methods</a></div>
+          <h2>What I want to study next.</h2>
+          <p class="interest-intro">How should a controller respond when the model, sensing, or timing differs from what simulation assumes?</p>
+          <a class="text-link" href="research.html"><span>Research interests and possible methods</span><span aria-hidden="true">↗</span></a>
         </div>
         <ol class="interest-list">
-          <li><span>01</span><div><strong>Timing-aware state estimation</strong><br>How can timestamps, action history, jitter, and missed cycles inform a current-state estimate?</div></li>
-          <li><span>02</span><div><strong>Failure-adaptive control</strong><br>When should uncertainty change an RL or MPC controller's action, speed, or risk level?</div></li>
-          <li><span>03</span><div><strong>Hybrid locomotion on hardware</strong><br>How do contact changes, wheel motion, and real transport delays interact in a complete loop?</div></li>
+          <li><span>01</span><div><strong>Timing-aware state estimation</strong><p>How can timestamps, action history, jitter, and missed cycles inform a current-state estimate?</p></div></li>
+          <li><span>02</span><div><strong>Failure-adaptive control</strong><p>When should uncertainty change an RL or MPC controller's action, speed, or risk level?</p></div></li>
+          <li><span>03</span><div><strong>Hybrid locomotion on hardware</strong><p>How do contact changes, wheel motion, and real transport delays interact in a complete loop?</p></div></li>
         </ol>
       </div>
     </section>
@@ -105,6 +87,6 @@
 
   <div data-site-footer></div>
   <script src="js/site.js?v=20261004"></script>
-  <script src="js/i18n.js?v=20261004"></script>
+  <script src="js/i18n.js?v=20261004-layout"></script>
 </body>
 </html>
